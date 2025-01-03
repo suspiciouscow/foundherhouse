@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #AE3B46;
+    --text: #191A1B;
+    --background: #FAF7F4;
+  }
+
+  body {
+    @apply bg-[#FAF7F4];
+  }
+
+  /* Custom animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Decorative elements */
+  .decorative-asterisk {
+    @apply absolute text-8xl text-[#AE3B46] opacity-20 font-playfair;
+  }
+
+  .decorative-asterisk-top-right { 
+    @apply top-20 right-10;
+  }
+
+  .decorative-asterisk-bottom-left {
+    @apply bottom-20 left-10 rotate-45;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .elegant-shadow {
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .hover-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] 
+      after:w-0 after:bg-current after:transition-all hover:after:w-full;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-[#AE3B46] to-[#AE3B46] bg-clip-text text-transparent inline-block tracking-wide;
+    letter-spacing: 0.099em;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .text-primary {
+    @apply text-[#AE3B46];
+  }
+
+  .text-main {
+    @apply text-[#191A1B];
+  }
+
+  .text-main-muted {
+    @apply text-[#191A1B]/80;
+  }
+}
