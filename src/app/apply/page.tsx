@@ -63,7 +63,7 @@ export default function Apply() {
       [name]: value
     }))
     // Clear error when user starts typing
-    if (errors[name]) {
+    if (errors[name as keyof FormErrors]) {  // Add type assertion here
       setErrors(prev => ({
         ...prev,
         [name]: ''
