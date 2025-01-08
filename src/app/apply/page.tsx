@@ -98,7 +98,7 @@ export default function Apply() {
         project: '',
         about: ''
       })
-    } catch (error) {
+    } catch {
       setErrors(prev => ({
         ...prev,
         submit: 'Failed to submit application. Please try again.'
@@ -119,8 +119,7 @@ export default function Apply() {
       <main className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center text-center pt-20 animate-fade-in">
           <h1 className="text-6xl font-light tracking-normal mb-6 max-w-4xl leading-[1.1]">
-            <span className="text-main font-playfair"> Apply Now</span>
-        
+            <span className="text-main font-playfair">Apply Now</span>
           </h1>
           <p className="text-main-muted text-lg max-w-2xl mb-12 leading-relaxed">
             Join our community of ambitious women founders and innovators
@@ -130,7 +129,7 @@ export default function Apply() {
         {submitSuccess ? (
           <div className="max-w-2xl mx-auto p-8 bg-primary/10 rounded-lg text-center backdrop-blur-sm">
             <h2 className="text-2xl text-main mb-2 font-playfair">Application Submitted!</h2>
-            <p className="text-main-muted">Thank you for applying. We'll be in touch soon.</p>
+            <p className="text-main-muted">Thank you for applying. We&apos;ll be in touch soon.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-8 pb-24">
