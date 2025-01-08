@@ -4,15 +4,30 @@ import { useState } from 'react'
 import Nav from '@/components/nav'
 import { Sparkles } from 'lucide-react'
 
+interface FormData {
+  fullName: string;
+  email: string;
+  project: string;
+  about: string;
+}
+
+interface FormErrors {
+  fullName?: string;
+  email?: string;
+  project?: string;
+  about?: string;
+  submit?: string;
+}
+
 export default function Apply() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
     project: '',
     about: ''
   })
 
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
 
@@ -41,7 +56,7 @@ export default function Apply() {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
@@ -56,7 +71,7 @@ export default function Apply() {
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
     if (!validateForm()) return
