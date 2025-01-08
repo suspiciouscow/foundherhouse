@@ -32,7 +32,7 @@ export default function Apply() {
   const [submitSuccess, setSubmitSuccess] = useState(false)
 
   const validateForm = () => {
-    const newErrors = {}
+    const newErrors: FormErrors = {}
     
     if (!formData.fullName.trim()) {
       newErrors.fullName = 'Full name is required'
