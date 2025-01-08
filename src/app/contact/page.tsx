@@ -19,7 +19,7 @@ export default function Contact() {
           <span className="text-main font-playfair ml-4">Us</span>
         </h1>
           <p className="text-main-muted text-lg max-w-2xl mb-12 leading-relaxed">
-            Have questions about FoundHer House? We'd love to hear from you.
+            Have questions about FoundHer House? We&apos;d love to hear from you.
           </p>
         </div>
 

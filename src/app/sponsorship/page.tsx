@@ -30,7 +30,7 @@ export default function Sponsorship() {
               Partner With Us
             </h2>
             <p className="text-main-muted text-lg leading-relaxed">
-              By sponsoring FoundHer House, you're investing in the future of women in technology. 
+              By sponsoring FoundHer House, you&apos;re investing in the future of women in technology.
               Our carefully curated community provides unique opportunities for meaningful engagement and support.
             </p>
           </div>
