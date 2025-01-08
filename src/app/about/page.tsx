@@ -86,24 +86,24 @@ export default function About() {
           </section>
 
           {/* CTA Section */}
-          <section className="text-center pt-8">
-            <p className="text-main-muted mb-8 text-lg">
-              Ready to join our community of founders?
-            </p>
-            <Link
-              href="/apply"
-              className="group relative inline-flex items-center justify-center transition-all duration-300"
-            >
-              <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
-                transition-transform group-hover:translate-x-1 group-hover:translate-y-1 shadow-lg shadow-[#000000]"></div>
-              <div className="relative inline-flex items-center justify-center px-10 py-4
-                text-lg font-medium text-white bg-[#AE3B46]
-                border border-[#191A1B] rounded-lg group-hover:shadow-lg">
-                Apply Now
-                <Sparkles className="ml-2 w-4 h-4" />
-              </div>
-            </Link>
-          </section>
+        <section className="text-center pt-8">
+          <p className="text-main-muted mb-8 text-lg">
+            Ready to join our community of founders?
+          </p>
+          <Link
+            href="/apply"
+            className="group relative inline-flex items-center justify-center transition-all duration-300"
+          >
+            <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
+              transition-transform group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-lg shadow-[#000000]"></div>
+            <div className="relative inline-flex items-center justify-center px-10 py-4
+              text-lg font-medium text-white bg-[#AE3B46]
+              border border-[#191A1B] rounded-lg">
+              Apply Now
+              <Sparkles className="ml-2 w-4 h-4" />
+            </div>
+          </Link>
+        </section>
         </div>
       </main>
     </div>

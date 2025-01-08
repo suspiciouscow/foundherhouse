@@ -59,20 +59,20 @@ export default function Sponsorship() {
           </div>
 
           {/* CTA Section */}
-          <div className="text-center">
-            <button
-              className="group relative inline-flex items-center justify-center transition-all duration-300"
-            >
-              <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
-                transition-transform group-hover:translate-x-1 group-hover:translate-y-1 shadow-lg shadow-[#000000]"></div>
-              <div className="relative inline-flex items-center justify-center px-10 py-4
-                text-lg font-medium text-white bg-[#AE3B46]
-                border border-[#191A1B] rounded-lg group-hover:shadow-lg">
-                Become a Sponsor
-                <Sparkles className="ml-2 w-4 h-4" />
-              </div>
-            </button>
-          </div>
+        <div className="text-center">
+          <button
+            className="group relative inline-flex items-center justify-center transition-all duration-300"
+          >
+            <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
+              transition-transform group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-lg shadow-[#000000]"></div>
+            <div className="relative inline-flex items-center justify-center px-10 py-4
+              text-lg font-medium text-white bg-[#AE3B46]
+              border border-[#191A1B] rounded-lg">
+              Become a Sponsor
+              <Sparkles className="ml-2 w-4 h-4" />
+            </div>
+          </button>
+        </div>
         </div>
       </main>
     </div>
