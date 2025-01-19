@@ -207,10 +207,10 @@ export default function Apply() {
             </div>
 
             <div>
-              <label className="block text-main font-medium mb-2">
-                What is the most impressive thing you've worked on?
-                <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.project} words max)</span>
-              </label>
+            <label className="block text-main font-medium mb-2">
+            What is the most impressive thing you&apos;ve worked on?
+            <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.project} words max)</span>
+          </label>
               <textarea 
                 name="project"
                 value={formData.project}
