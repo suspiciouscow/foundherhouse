@@ -9,6 +9,7 @@ interface FormData {
   email: string;
   project: string;
   about: string;
+  unique: string;
 }
 
 interface FormErrors {
@@ -16,7 +17,14 @@ interface FormErrors {
   email?: string;
   project?: string;
   about?: string;
+  unique?: string;
   submit?: string;
+}
+
+const WORD_LIMITS = {
+  project: 200,
+  about: 300,
+  unique: 150
 }
 
 export default function Apply() {
@@ -24,12 +32,17 @@ export default function Apply() {
     fullName: '',
     email: '',
     project: '',
-    about: ''
+    about: '',
+    unique: ''
   })
 
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  const getWordCount = (text: string) => {
+    return text.trim().split(/\s+/).filter(word => word.length > 0).length
+  }
 
   const validateForm = () => {
     const newErrors: FormErrors = {}
@@ -46,10 +59,20 @@ export default function Apply() {
     
     if (!formData.project.trim()) {
       newErrors.project = 'Please tell us what you are working on'
+    } else if (getWordCount(formData.project) > WORD_LIMITS.project) {
+      newErrors.project = `Please keep your response under ${WORD_LIMITS.project} words`
     }
     
     if (!formData.about.trim()) {
       newErrors.about = 'Please tell us about yourself'
+    } else if (getWordCount(formData.about) > WORD_LIMITS.about) {
+      newErrors.about = `Please keep your response under ${WORD_LIMITS.about} words`
+    }
+
+    if (!formData.unique.trim()) {
+      newErrors.unique = 'Please tell us something unique about yourself'
+    } else if (getWordCount(formData.unique) > WORD_LIMITS.unique) {
+      newErrors.unique = `Please keep your response under ${WORD_LIMITS.unique} words`
     }
 
     setErrors(newErrors)
@@ -58,17 +81,28 @@ export default function Apply() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
+    
+    // Check if the field has a word limit and if the new value exceeds it
+    if (WORD_LIMITS.hasOwnProperty(name as keyof typeof WORD_LIMITS)) {
+      const wordCount = getWordCount(value)
+      const limit = WORD_LIMITS[name as keyof typeof WORD_LIMITS]
+      if (wordCount > limit) {
+        setErrors(prev => ({
+          ...prev,
+          [name]: `Please keep your response under ${limit} words`
+        }))
+      } else {
+        setErrors(prev => ({
+          ...prev,
+          [name]: ''
+        }))
+      }
+    }
+    
     setFormData(prev => ({
       ...prev,
       [name]: value
     }))
-    // Clear error when user starts typing
-    if (errors[name as keyof FormErrors]) {  // Add type assertion here
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }))
-    }
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -96,7 +130,8 @@ export default function Apply() {
         fullName: '',
         email: '',
         project: '',
-        about: ''
+        about: '',
+        unique: ''
       })
     } catch {
       setErrors(prev => ({
@@ -125,6 +160,8 @@ export default function Apply() {
             Join our community of ambitious women founders and innovators
           </p>
         </div>
+
+      
         
         {submitSuccess ? (
           <div className="max-w-2xl mx-auto p-8 bg-primary/10 rounded-lg text-center backdrop-blur-sm">
@@ -170,25 +207,33 @@ export default function Apply() {
             </div>
 
             <div>
-              <label className="block text-main font-medium mb-2">What are you working on?</label>
-              <input 
-                type="text"
+              <label className="block text-main font-medium mb-2">
+                What is the most impressive thing you've worked on?
+                <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.project} words max)</span>
+              </label>
+              <textarea 
                 name="project"
                 value={formData.project}
                 onChange={handleChange}
                 className={`w-full p-3 rounded-lg bg-white text-main border 
                   ${errors.project ? 'border-red-500' : 'border-primary/10'}
                   focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary 
-                  transition-colors placeholder:text-main/40`}
-                placeholder="Your startup idea or current project"
+                  transition-colors placeholder:text-main/40 h-32 resize-none`}
+                placeholder="Your startup, project, or something else you've built"
               />
-              {errors.project && (
-                <p className="mt-1 text-red-500 text-sm">{errors.project}</p>
-              )}
+              <div className="flex justify-between mt-1">
+                <p className={errors.project ? "text-red-500 text-sm" : "hidden"}>{errors.project}</p>
+                <p className="text-main-muted text-sm ml-auto">
+                  {getWordCount(formData.project)}/{WORD_LIMITS.project} words
+                </p>
+              </div>
             </div>
 
             <div>
-              <label className="block text-main font-medium mb-2">Tell us about yourself</label>
+              <label className="block text-main font-medium mb-2">
+                Why do you want to join FoundHer House?
+                <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.about} words max)</span>
+              </label>
               <textarea 
                 name="about"
                 value={formData.about}
@@ -197,33 +242,59 @@ export default function Apply() {
                   ${errors.about ? 'border-red-500' : 'border-primary/10'}
                   focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary 
                   transition-colors placeholder:text-main/40 h-32 resize-none`}
-                placeholder="Share your story, experience, and vision"
+                placeholder="Tell us about your goals and how FoundHer House can help you achieve them"
               />
-              {errors.about && (
-                <p className="mt-1 text-red-500 text-sm">{errors.about}</p>
-              )}
+              <div className="flex justify-between mt-1">
+                <p className={errors.about ? "text-red-500 text-sm" : "hidden"}>{errors.about}</p>
+                <p className="text-main-muted text-sm ml-auto">
+                  {getWordCount(formData.about)}/{WORD_LIMITS.about} words
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-main font-medium mb-2">
+                What is something unique about you?
+                <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.unique} words max)</span>
+              </label>
+              <textarea 
+                name="unique"
+                value={formData.unique}
+                onChange={handleChange}
+                className={`w-full p-3 rounded-lg bg-white text-main border 
+                  ${errors.unique ? 'border-red-500' : 'border-primary/10'}
+                  focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary 
+                  transition-colors placeholder:text-main/40 h-32 resize-none`}
+                placeholder="Tell us something interesting or unique about yourself"
+              />
+              <div className="flex justify-between mt-1">
+                <p className={errors.unique ? "text-red-500 text-sm" : "hidden"}>{errors.unique}</p>
+                <p className="text-main-muted text-sm ml-auto">
+                  {getWordCount(formData.unique)}/{WORD_LIMITS.unique} words
+                </p>
+              </div>
             </div>
 
             {errors.submit && (
               <div className="text-red-500 text-center">{errors.submit}</div>
             )}
 
-            <div className="pt-4">
-              <button 
-                type="submit"
-                disabled={isSubmitting}
-                className="group relative w-full inline-flex items-center justify-center transition-all duration-300"
-              >
-                <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
-                  transition-transform group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-lg shadow-[#000000]"></div>
-                <div className={`relative w-full inline-flex items-center justify-center px-10 py-4
-                  text-lg font-medium text-white bg-[#AE3B46]
-                  border border-[#191A1B] rounded-lg ${isSubmitting ? 'opacity-75' : ''}`}>
-                  {isSubmitting ? 'Submitting...' : 'Submit Application'}
-                  <Sparkles className="ml-2 w-4 h-4" />
-                </div>
-              </button>
-            </div>
+          <div className="pt-4 w-full flex items-center justify-center">   
+            <button 
+              type="submit"
+              disabled={isSubmitting}
+              className="group relative inline-flex items-center justify-center transition-all duration-300"
+            >
+              <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
+                transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+              <div className={`relative inline-flex items-center justify-center px-6 py-3
+                text-base font-medium text-white bg-[#AE3B46]
+                border border-[#191A1B] rounded-lg ${isSubmitting ? 'opacity-75' : ''}`}>
+                {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                <Sparkles className="ml-2 w-4 h-4" />
+              </div>
+          </button>
+        </div>
           </form>
         )}
       </main>
