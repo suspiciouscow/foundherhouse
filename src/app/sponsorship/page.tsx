@@ -1,78 +1,98 @@
 'use client'
 
 import Nav from '@/components/nav'
-import { Sparkles } from 'lucide-react'
+import { Mail } from 'lucide-react'
 
 export default function Sponsorship() {
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="decorative-asterisk decorative-asterisk-top-right">*</div>
-      <div className="decorative-asterisk decorative-asterisk-bottom-left">*</div>
+    <div className="min-h-screen bg-[#FAF7F4] relative overflow-hidden">
+      {/* Subtle decorative elements */}
+      <div className="decorative-asterisk decorative-asterisk-top-right text-[#AE3B46]/20">*</div>
+      <div className="decorative-asterisk decorative-asterisk-bottom-left text-[#AE3B46]/20">*</div>
       
       <Nav />
 
-      <main className="container mx-auto px-4">
-        <div className="flex flex-col items-center justify-center text-center pt-20 animate-fade-in">
-          <h1 className="text-6xl font-light tracking-normal mb-6 max-w-4xl leading-[1.1]">
-            <span className="text-main font-playfair">Support </span>
-            <span className="text-main font-playfair">Us</span>
+      <main className="container mx-auto px-4 pb-24">
+        {/* Header */}
+        <div className="text-center pt-16">
+          <h1 className="animate-fade-in text-[64px] font-light tracking-[-0.02em] text-[#191A1B] mb-3">
+            <span className="font-playfair">Support Us</span>
           </h1>
-          <p className="text-main-muted text-lg max-w-2xl mb-12 leading-relaxed">
+          <p className="animate-fade-in text-[#494949] text-lg max-w-xl mx-auto mb-24 leading-relaxed delay-100">
             Support the next generation of women founders and be part of our mission to increase diversity in tech entrepreneurship.
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-12 pb-24">
-          {/* Partner Section */}
-          <div className="space-y-6 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-lg p-8 elegant-shadow">
-            <h2 className="text-2xl text-main font-medium tracking-wide font-playfair">
-              Partner With Us
-            </h2>
-            <p className="text-main-muted text-lg leading-relaxed">
-              By sponsoring FoundHer House, you&apos;re investing in the future of women in technology.
-              Our carefully curated community provides unique opportunities for meaningful engagement and support.
-            </p>
+        <div className="max-w-3xl mx-auto">
+          {/* Partner Section with subtle background */}
+          <div className="mb-24 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-white/50 to-transparent rounded-2xl"></div>
+            <div className="relative p-8">
+              <h2 className="text-2xl text-[#191A1B] font-medium font-playfair mb-4">
+                Partner With Us
+              </h2>
+              <p className="text-[#494949] text-lg leading-relaxed">
+                By sponsoring FoundHer House, you're investing in the future of women in technology.
+                Our carefully curated community provides unique opportunities for meaningful engagement and support.
+              </p>
+            </div>
           </div>
 
           {/* Benefits Section */}
-          <div className="space-y-6 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-lg p-8 elegant-shadow">
-            <h2 className="text-2xl text-main font-medium tracking-wide font-playfair">
+          <div className="mb-24">
+            <h2 className="text-2xl text-[#191A1B] font-medium font-playfair mb-12 text-center">
               Sponsorship Benefits
             </h2>
-            <ul className="space-y-4">
+            <div className="grid grid-cols-2 gap-x-16 gap-y-12">
               {[
-                "Access to our network of innovative founders",
-                "Brand visibility in our space and events",
-                "First look at emerging technologies and startups",
-                "Opportunity to mentor promising entrepreneurs"
+                {
+                  title: "Network Access",
+                  description: "Connect with our community of innovative founders and emerging entrepreneurs."
+                },
+                {
+                  title: "Brand Visibility",
+                  description: "Feature your brand in our space and at our exclusive events."
+                },
+                {
+                  title: "First Look Access",
+                  description: "Preview emerging technologies and startups from our resident founders."
+                },
+                {
+                  title: "Mentorship Opportunities",
+                  description: "Shape the future by mentoring promising entrepreneurs in our program."
+                }
               ].map((benefit, index) => (
-                <li
-                  key={index}
-                  className="flex items-center space-x-3 text-main-muted"
-                >
-                  <span className="text-primary">*</span>
-                  <span>{benefit}</span>
-                </li>
+                <div key={index} className="group relative">
+                  <div className="absolute -left-4 top-0 w-[2px] h-0 bg-[#AE3B46]/10 
+                    group-hover:h-full transition-all duration-300"></div>
+                  <div className="space-y-3 pl-4">
+                    <h3 className="text-[#191A1B] font-playfair text-lg group-hover:text-[#AE3B46] transition-colors">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-[#494949] leading-relaxed">
+                      {benefit.description}
+                    </p>
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
-          {/* CTA Section */}
-        <div className="text-center">
-          <button
-            className="group relative inline-flex items-center justify-center transition-all duration-300"
-          >
-            <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
-              transition-transform group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-lg shadow-[#000000]"></div>
-            <div className="relative inline-flex items-center justify-center px-10 py-4
-              text-lg font-medium text-white bg-[#AE3B46]
-              border border-[#191A1B] rounded-lg">
-              Become a Sponsor
-              <Sparkles className="ml-2 w-4 h-4" />
+          {/* Contact Section */}
+          <div className="text-center bg-white/30 backdrop-blur-sm rounded-2xl p-8">
+            <div className="inline-flex items-center space-x-4">
+              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#AE3B46]/5">
+                <Mail className="w-6 h-6 text-[#AE3B46]" />
+              </div>
+              <div className="text-left">
+                <p className="text-[#191A1B] text-lg font-playfair mb-1">Get in Touch</p>
+                <a href="mailto:partnerships@foundherhouse.com" 
+                   className="text-[#494949] hover:text-[#AE3B46] transition-colors">
+                 contact@foundherhouse.com
+                </a>
+              </div>
             </div>
-          </button>
-        </div>
+          </div>
         </div>
       </main>
     </div>

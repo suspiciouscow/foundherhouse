@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Nav from '@/components/nav'
 import { useState } from 'react'
-import { ChevronDown, Sparkles } from 'lucide-react'
+import { ChevronDown, Sparkles, Mail, MapPin, Instagram } from 'lucide-react'
 
 export default function Home() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -34,10 +34,8 @@ export default function Home() {
       answer: "You'll be part of a vibrant community of female founders and innovators. We regularly host networking dinners, special events, and culminate with a demo day where you can pitch to VCs. Our community is designed to help you build meaningful connections and grow your network."
     }
   ]
-  
   return (
     <div className="min-h-screen bg-[#FAF7F4] relative overflow-hidden">
-      {/* Decorative elements */}
       <div className="decorative-asterisk decorative-asterisk-top-right"></div>
       <div className="decorative-asterisk decorative-asterisk-bottom-left"></div>
       
@@ -47,27 +45,27 @@ export default function Home() {
         {/* Hero Section */}
         <div className="flex flex-col items-center justify-center text-center pt-10 animate-fade-in">
           {/* Logo */}
-          <div className="mb-6"> {/* Further reduced margin-bottom */}
-            <img src="/foundher-logo.png" alt="FoundHer House" className="h-48" /> {/* Increased height */}
+          <div className="mb-6">
+            <img src="/foundher-logo.png" alt="FoundHer House" className="h-48" />
           </div>
   
-          {/* Hero Text */}
-          <h1 className="text-7xl font-light tracking-normal mb-8 max-w-4xl leading-[1.1]"> {/* Further reduced margin-bottom */}
-            <span className="text-main font-playfair">Where ambitious women </span>
-            <br className="hidden sm:block" />
-            <span className="text-main font-playfair">build </span>
-            <span className="text-gradient font-playfair italic inline-block py-2">extraordinary</span>
-            <span className="text-main font-playfair"> ventures</span>
+         {/* Hero Text - Tighter spacing */}
+         <div className="mb-10">
+          <h1 className="text-7xl font-light tracking-[-0.03em]">
+            <div className="text-[#191A1B] font-playfair leading-[1.3]">Where ambitious women</div>
+            <div className="text-[#191A1B] font-playfair -mt-5 leading-[1.3]">
+              build <span className="text-[#AE3B46] font-playfair italic">extraordinary</span>
+            </div>
+            <div className="text-[#191A1B] font-playfair -mt-5 leading-[1.3]">ventures</div>
           </h1>
-  
+        </div>
           {/* Mission Statement */}
-          <p className="text-main-muted text-lg max-w-2xl mb-10 leading-relaxed"> {/* Adjusted margin-bottom */}
+          <p className="text-[#494949] text-lg max-w-2xl mb-10 leading-relaxed">
             A curated community and living space for female founders 
             to collaborate, innovate, and scale their startups in an 
             environment designed for success.
           </p>
 
-          
           {/* CTA Button */}
           <Link
             href="/apply"
@@ -87,9 +85,7 @@ export default function Home() {
         {/* FAQ Section */}
         <section className="py-24 relative">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl text-main font-semibold tracking-wide text-center mb-16 font-playfair">
-              Frequently Asked Questions
-            </h2>
+          
 
             <div className="space-y-4">
               {faqs.map((faq, index) => (
@@ -124,6 +120,70 @@ export default function Home() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        
+        {/* Contact Section */}
+        <section className="pb-24">
+          <div className="flex flex-col items-center justify-center text-center mb-12">
+            <h2 className="text-4xl font-light mb-6 max-w-4xl leading-[1.1] font-playfair">
+              <span className="text-main">Contact Us</span>
+            </h2>
+            <p className="text-main-muted text-lg max-w-2xl leading-relaxed">
+              Have questions about FoundHer House? We&apos;d love to hear from you.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <div className="flex justify-center items-center space-x-8">
+              {/* Email */}
+              <a href="mailto:hello@foundherhouse.com" 
+                className="group">
+                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#AE3B46]/5 
+                  group-hover:bg-[#AE3B46]/10 transition-colors">
+                  <Mail className="w-6 h-6 text-[#AE3B46]" />
+                </div>
+              </a>
+              
+              {/* Location */}
+              <a href="https://maps.google.com/?q=San+Francisco" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group">
+                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#AE3B46]/5 
+                  group-hover:bg-[#AE3B46]/10 transition-colors">
+                  <MapPin className="w-6 h-6 text-[#AE3B46]" />
+                </div>
+              </a>
+
+              {/* Instagram */}
+              <a href="https://instagram.com/foundherhouse" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group">
+                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#AE3B46]/5 
+                  group-hover:bg-[#AE3B46]/10 transition-colors">
+                  <Instagram className="w-6 h-6 text-[#AE3B46]" />
+                </div>
+              </a>
+
+              {/* X/Twitter */}
+              <a href="https://x.com/foundherhouse" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group">
+                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#AE3B46]/5 
+                  group-hover:bg-[#AE3B46]/10 transition-colors">
+                  <svg 
+                    viewBox="0 0 24 24" 
+                    className="w-6 h-6 text-[#AE3B46] fill-current"
+                  >
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </div>
+              </a>
             </div>
           </div>
         </section>
