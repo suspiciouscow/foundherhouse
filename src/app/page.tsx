@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Nav from '@/components/nav'
 import { useState } from 'react'
-import { ChevronDown, Sparkles, Mail, MapPin, Instagram } from 'lucide-react'
+import { ChevronDown, Sparkles, Mail, Instagram } from 'lucide-react'
 
 export default function Home() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
