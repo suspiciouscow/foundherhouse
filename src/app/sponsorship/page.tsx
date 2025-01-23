@@ -86,7 +86,7 @@ export default function Sponsorship() {
               </div>
               <div className="text-left">
                 <p className="text-[#191A1B] text-lg font-playfair mb-1">Get in Touch</p>
-                <a href="mailto:partnerships@foundherhouse.com" 
+                <a href="mailto:contact@foundherhouse.org" 
                    className="text-[#494949] hover:text-[#AE3B46] transition-colors">
                  contact@foundherhouse.com
                 </a>

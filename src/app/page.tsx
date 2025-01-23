@@ -139,7 +139,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto">
             <div className="flex justify-center items-center space-x-8">
               {/* Email */}
-              <a href="mailto:hello@foundherhouse.com" 
+              <a href="mailto:contact@foundherhouse.org" 
                 className="group">
                 <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#AE3B46]/5 
                   group-hover:bg-[#AE3B46]/10 transition-colors">
@@ -147,16 +147,6 @@ export default function Home() {
                 </div>
               </a>
               
-              {/* Location */}
-              <a href="https://maps.google.com/?q=San+Francisco" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group">
-                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#AE3B46]/5 
-                  group-hover:bg-[#AE3B46]/10 transition-colors">
-                  <MapPin className="w-6 h-6 text-[#AE3B46]" />
-                </div>
-              </a>
 
               {/* Instagram */}
               <a href="https://instagram.com/foundherhouse" 

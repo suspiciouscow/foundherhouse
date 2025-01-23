@@ -24,7 +24,7 @@ export default function Nav() {
           >
             Sponsorship
           </Link>
-          
+            
           <Link
             href="/apply"
             className="text-[#1C1C1C] border border-[#1C1C1C] px-5 py-2 rounded 
