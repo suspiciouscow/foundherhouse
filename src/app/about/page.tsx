@@ -38,6 +38,29 @@ export default function About() {
             </div>
           </section>
 
+          {/* Founder Section */}
+        <section className="max-w-3xl mx-auto mb-24">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="w-64 h-64 rounded-full overflow-hidden bg-gray-100">
+              <img 
+                src="/linkedin.jpg" 
+                alt="Miki Safronov" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <h2 className="text-2xl text-[#191A1B] font-medium font-playfair mb-2">Miki S-Y</h2>
+              <div className="space-y-2 text-[#494949] leading-relaxed">
+                <p>USC Iovine and Young Academy Student</p>
+                <p>Business Owner & Startup Founder</p>
+                <p className="mt-4">
+                  Passionate about empowering women in tech and creating spaces for innovation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
           {/* What We Offer Section */}
           <section>
             <h2 className="text-2xl text-[#191A1B] font-medium font-playfair mb-12 text-center">
