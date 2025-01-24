@@ -116,10 +116,9 @@ export default function Apply() {
         body: JSON.stringify(formData),
       })
       
-      console.log('Response:', await response.text()) // Add logging
+      const data = await response.json()
       
       if (!response.ok) {
-        const data = await response.json()
         throw new Error(data.error || 'Submission failed')
       }
   
@@ -132,16 +131,16 @@ export default function Apply() {
         unique: ''
       })
     } catch (error) {
-      console.error('Full error:', error)
+      console.error('Submission error:', error)
       setErrors(prev => ({
-        ...prev, 
+        ...prev,
         submit: error instanceof Error ? error.message : 'Failed to submit application'
       }))
     } finally {
       setIsSubmitting(false)
     }
   }
-
+  
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Nav />
