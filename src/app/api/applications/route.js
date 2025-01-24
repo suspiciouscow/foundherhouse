@@ -4,19 +4,11 @@ import { NextResponse } from 'next/server'
 export async function POST(req) {
   try {
     const body = await req.json()
-    
-    // Basic validation
-    if (!body.fullName || !body.email || !body.project || !body.about) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
-    }
-
     const client = await clientPromise
-    const db = client.db('foundher') // Your database name
+    console.log('MongoDB connected')
     
-    // Add submission timestamp
+    const db = client.db('foundher')
+    
     const application = {
       ...body,
       submittedAt: new Date(),
@@ -27,15 +19,15 @@ export async function POST(req) {
       .collection('applications')
       .insertOne(application)
     
-    return NextResponse.json({ 
+    return NextResponse.json({
       message: 'Application submitted successfully',
-      applicationId: result.insertedId 
+      applicationId: result.insertedId
     })
 
   } catch (error) {
-    console.error('Database Error:', error)
+    console.error('MongoDB error:', error)
     return NextResponse.json(
-      { error: 'Failed to submit application' },
+      { error: 'Database connection failed' },
       { status: 500 }
     )
   }

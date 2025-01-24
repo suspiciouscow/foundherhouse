@@ -47,21 +47,32 @@ export default function Apply() {
   const validateForm = () => {
     const newErrors: FormErrors = {}
     
-    if (!formData.fullName.trim() || !/^[a-zA-Z\s]{2,50}$/.test(formData.fullName)) {
-      newErrors.fullName = 'Please enter a valid name (2-50 characters, letters only)'
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = 'Full name is required'
     }
     
-    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address'
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email'
     }
     
-    for (const field of ['project', 'about', 'unique'] as const) {
-      const wordCount = getWordCount(formData[field])
-      if (!formData[field].trim()) {
-        newErrors[field] = `This field is required`
-      } else if (wordCount > WORD_LIMITS[field]) {
-        newErrors[field] = `Please keep your response under ${WORD_LIMITS[field]} words`
-      }
+    if (!formData.project.trim()) {
+      newErrors.project = 'Please tell us what you are working on'
+    } else if (getWordCount(formData.project) > WORD_LIMITS.project) {
+      newErrors.project = `Please keep your response under ${WORD_LIMITS.project} words`
+    }
+    
+    if (!formData.about.trim()) {
+      newErrors.about = 'Please tell us about yourself'
+    } else if (getWordCount(formData.about) > WORD_LIMITS.about) {
+      newErrors.about = `Please keep your response under ${WORD_LIMITS.about} words`
+    }
+
+    if (!formData.unique.trim()) {
+      newErrors.unique = 'Please tell us something unique about yourself'
+    } else if (getWordCount(formData.unique) > WORD_LIMITS.unique) {
+      newErrors.unique = `Please keep your response under ${WORD_LIMITS.unique} words`
     }
 
     setErrors(newErrors)
@@ -70,17 +81,29 @@ export default function Apply() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
+    
+    // Check if the field has a word limit and if the new value exceeds it
     if (WORD_LIMITS.hasOwnProperty(name as keyof typeof WORD_LIMITS)) {
       const wordCount = getWordCount(value)
       const limit = WORD_LIMITS[name as keyof typeof WORD_LIMITS]
-      setErrors(prev => ({
-        ...prev,
-        [name]: wordCount > limit ? `Please keep your response under ${limit} words` : ''
-      }))
+      if (wordCount > limit) {
+        setErrors(prev => ({
+          ...prev,
+          [name]: `Please keep your response under ${limit} words`
+        }))
+      } else {
+        setErrors(prev => ({
+          ...prev,
+          [name]: ''
+        }))
+      }
     }
-    setFormData(prev => ({ ...prev, [name]: value }))
+    
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
   }
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!validateForm()) return
@@ -89,18 +112,17 @@ export default function Apply() {
     try {
       const response = await fetch('/api/applications', {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       })
-
-      const data = await response.json()
+      
+      console.log('Response:', await response.text()) // Add logging
       
       if (!response.ok) {
+        const data = await response.json()
         throw new Error(data.error || 'Submission failed')
       }
-
+  
       setSubmitSuccess(true)
       setFormData({
         fullName: '',
@@ -110,9 +132,9 @@ export default function Apply() {
         unique: ''
       })
     } catch (error) {
-      console.error('Submission error:', error)
+      console.error('Full error:', error)
       setErrors(prev => ({
-        ...prev,
+        ...prev, 
         submit: error instanceof Error ? error.message : 'Failed to submit application'
       }))
     } finally {
@@ -124,6 +146,7 @@ export default function Apply() {
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Nav />
       
+      {/* Decorative elements */}
       <div className="decorative-asterisk decorative-asterisk-top-right">*</div>
       <div className="decorative-asterisk decorative-asterisk-bottom-left">*</div>
 
@@ -137,6 +160,8 @@ export default function Apply() {
           </p>
         </div>
 
+      
+        
         {submitSuccess ? (
           <div className="max-w-2xl mx-auto p-8 bg-primary/10 rounded-lg text-center backdrop-blur-sm">
             <h2 className="text-2xl text-main mb-2 font-playfair">Application Submitted!</h2>
@@ -181,10 +206,10 @@ export default function Apply() {
             </div>
 
             <div>
-              <label className="block text-main font-medium mb-2">
-                What is the most impressive thing you&apos;ve worked on?
-                <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.project} words max)</span>
-              </label>
+            <label className="block text-main font-medium mb-2">
+            What is the most impressive thing you&apos;ve worked on?
+            <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.project} words max)</span>
+          </label>
               <textarea 
                 name="project"
                 value={formData.project}
@@ -253,22 +278,22 @@ export default function Apply() {
               <div className="text-red-500 text-center">{errors.submit}</div>
             )}
 
-            <div className="pt-4 w-full flex items-center justify-center">   
-              <button 
-                type="submit"
-                disabled={isSubmitting}
-                className="group relative inline-flex items-center justify-center transition-all duration-300"
-              >
-                <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
-                  transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
-                <div className={`relative inline-flex items-center justify-center px-6 py-3
-                  text-base font-medium text-white bg-[#AE3B46]
-                  border border-[#191A1B] rounded-lg ${isSubmitting ? 'opacity-75' : ''}`}>
-                  {isSubmitting ? 'Submitting...' : 'Submit Application'}
-                  <Sparkles className="ml-2 w-4 h-4" />
-                </div>
-              </button>
-            </div>
+          <div className="pt-4 w-full flex items-center justify-center">   
+            <button 
+              type="submit"
+              disabled={isSubmitting}
+              className="group relative inline-flex items-center justify-center transition-all duration-300"
+            >
+              <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
+                transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+              <div className={`relative inline-flex items-center justify-center px-6 py-3
+                text-base font-medium text-white bg-[#AE3B46]
+                border border-[#191A1B] rounded-lg ${isSubmitting ? 'opacity-75' : ''}`}>
+                {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                <Sparkles className="ml-2 w-4 h-4" />
+              </div>
+          </button>
+        </div>
           </form>
         )}
       </main>
