@@ -3,6 +3,12 @@
 import { useState } from 'react'
 import Nav from '@/app/components/nav'
 import { Sparkles } from 'lucide-react'
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 interface FormData {
   fullName: string;
@@ -82,7 +88,6 @@ export default function Apply() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     
-    // Check if the field has a word limit and if the new value exceeds it
     if (WORD_LIMITS.hasOwnProperty(name as keyof typeof WORD_LIMITS)) {
       const wordCount = getWordCount(value)
       const limit = WORD_LIMITS[name as keyof typeof WORD_LIMITS]
@@ -104,24 +109,27 @@ export default function Apply() {
       [name]: value
     }))
   }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!validateForm()) return
     setIsSubmitting(true)
     
     try {
-      const response = await fetch('/api/applications', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-      
-      const data = await response.json()
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Submission failed')
-      }
-  
+      const { error } = await supabase
+        .from('applications')
+        .insert({
+          full_name: formData.fullName,
+          email: formData.email,
+          project: formData.project,
+          about: formData.about,
+          unique_fact: formData.unique,
+          submitted_at: new Date().toISOString(),
+          status: 'pending'
+        })
+
+      if (error) throw error
+
       setSubmitSuccess(true)
       setFormData({
         fullName: '',
@@ -145,7 +153,6 @@ export default function Apply() {
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Nav />
       
-      {/* Decorative elements */}
       <div className="decorative-asterisk decorative-asterisk-top-right">*</div>
       <div className="decorative-asterisk decorative-asterisk-bottom-left">*</div>
 
@@ -159,8 +166,6 @@ export default function Apply() {
           </p>
         </div>
 
-      
-        
         {submitSuccess ? (
           <div className="max-w-2xl mx-auto p-8 bg-primary/10 rounded-lg text-center backdrop-blur-sm">
             <h2 className="text-2xl text-main mb-2 font-playfair">Application Submitted!</h2>
@@ -205,10 +210,10 @@ export default function Apply() {
             </div>
 
             <div>
-            <label className="block text-main font-medium mb-2">
-            What is the most impressive thing you&apos;ve worked on?
-            <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.project} words max)</span>
-          </label>
+              <label className="block text-main font-medium mb-2">
+                What is the most impressive thing you&apos;ve worked on?
+                <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.project} words max)</span>
+              </label>
               <textarea 
                 name="project"
                 value={formData.project}
@@ -277,22 +282,22 @@ export default function Apply() {
               <div className="text-red-500 text-center">{errors.submit}</div>
             )}
 
-          <div className="pt-4 w-full flex items-center justify-center">   
-            <button 
-              type="submit"
-              disabled={isSubmitting}
-              className="group relative inline-flex items-center justify-center transition-all duration-300"
-            >
-              <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
-                transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
-              <div className={`relative inline-flex items-center justify-center px-6 py-3
-                text-base font-medium text-white bg-[#AE3B46]
-                border border-[#191A1B] rounded-lg ${isSubmitting ? 'opacity-75' : ''}`}>
-                {isSubmitting ? 'Submitting...' : 'Submit Application'}
-                <Sparkles className="ml-2 w-4 h-4" />
-              </div>
-          </button>
-        </div>
+            <div className="pt-4 w-full flex items-center justify-center">   
+              <button 
+                type="submit"
+                disabled={isSubmitting}
+                className="group relative inline-flex items-center justify-center transition-all duration-300"
+              >
+                <div className="absolute inset-0 w-full h-full bg-black rounded-lg transform
+                  transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                <div className={`relative inline-flex items-center justify-center px-6 py-3
+                  text-base font-medium text-white bg-[#AE3B46]
+                  border border-[#191A1B] rounded-lg ${isSubmitting ? 'opacity-75' : ''}`}>
+                  {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                  <Sparkles className="ml-2 w-4 h-4" />
+                </div>
+              </button>
+            </div>
           </form>
         )}
       </main>

@@ -1,23 +1,24 @@
-import clientPromise from '@/lib/mongodb'
+import { supabase } from '@/lib/supabase'
 import { NextResponse } from 'next/server'
 
 export async function POST(req) {
   try {
     const body = await req.json()
-    const client = await clientPromise
-    const db = client.db('foundher')
     
-    const application = {
-      ...body,
-      submittedAt: new Date(),
-      status: 'pending'
-    }
+    const { data, error } = await supabase
+      .from('applications')
+      .insert({
+        ...body,
+        submitted_at: new Date().toISOString(),
+        status: 'pending'
+      })
+      .select()
     
-    const result = await db.collection('applications').insertOne(application)
+    if (error) throw error
     
     return NextResponse.json({
       message: 'Application submitted successfully',
-      applicationId: result.insertedId
+      applicationId: data[0].id
     })
 
   } catch (error) {
