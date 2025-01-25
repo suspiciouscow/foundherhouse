@@ -1,11 +1,14 @@
 import { MongoClient } from 'mongodb'
 
 if (!process.env.MONGODB_URI) {
-  throw new Error('Please add your Mongodb URI to .env.local')
+  throw new Error('Missing MONGODB_URI')
 }
 
 const uri = process.env.MONGODB_URI
-const options = {}
+const options = {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+}
 
 let client
 let clientPromise
