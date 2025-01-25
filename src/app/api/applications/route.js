@@ -2,26 +2,42 @@ import clientPromise from '@/lib/mongodb'
 import { NextResponse } from 'next/server'
 
 export async function POST(req) {
+  console.log('API route started')
+  
   try {
-    const body = await req.json()
-    console.log('Form submission:', JSON.stringify(body, null, 2))
+    console.log('Request headers:', Object.fromEntries(req.headers.entries()))
+    console.log('Request method:', req.method)
     
+    let body
+    try {
+      const text = await req.text() // Get raw request body
+      console.log('Raw request body:', text)
+      body = JSON.parse(text)
+      console.log('Parsed request body:', body)
+    } catch (parseError) {
+      console.error('JSON parsing error:', parseError)
+      return NextResponse.json(
+        { error: 'Invalid JSON format in request body' },
+        { status: 400 }
+      )
+    }
+
     const client = await clientPromise
-    const db = client.db('foundher')
+    console.log('MongoDB connected')
     
+    const db = client.db('foundher')
     const application = {
       ...body,
       submittedAt: new Date(),
-      status: 'pending'
+      status: 'pending',
+      environment: process.env.NODE_ENV
     }
-    
-    console.log('Application to be stored:', JSON.stringify(application, null, 2))
     
     const result = await db
       .collection('applications')
       .insertOne(application)
     
-    console.log('MongoDB response:', JSON.stringify(result, null, 2))
+    console.log('MongoDB response:', result)
     
     return NextResponse.json({
       message: 'Application submitted successfully',
@@ -29,9 +45,9 @@ export async function POST(req) {
     })
 
   } catch (error) {
-    console.error('MongoDB error:', error)
+    console.error('Server error:', error)
     return NextResponse.json(
-      { error: 'Database connection failed' },
+      { error: 'Server error occurred' },
       { status: 500 }
     )
   }
