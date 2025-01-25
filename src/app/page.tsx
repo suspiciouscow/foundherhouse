@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Nav from '@/components/nav'
+import Nav from '@/app/components/nav'
 import { useState } from 'react'
 import { ChevronDown, Sparkles, Mail, Instagram } from 'lucide-react'
 

@@ -1,6 +1,6 @@
 'use client'
 
-import Nav from '@/components/nav'
+import Nav from '@/app/components/nav'
 import Link from 'next/link'
 import { Sparkles } from 'lucide-react'
 

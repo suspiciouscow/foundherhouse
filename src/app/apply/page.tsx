@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Nav from '@/components/nav'
+import Nav from '@/app/components/nav'
 import { Sparkles } from 'lucide-react'
 
 interface FormData {
@@ -140,7 +140,7 @@ export default function Apply() {
       setIsSubmitting(false)
     }
   }
-  
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Nav />
