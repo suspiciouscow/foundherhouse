@@ -2,11 +2,11 @@ import Link from 'next/link'
 
 export default function Nav() {
   return (
-    <nav className="py-6 px-4 border-b border-[#1C1C1C]/10">
+    <nav className="py-6 px-4 border-b border-gray-200">
       <div className="container mx-auto flex justify-between items-center">
         <Link 
           href="/" 
-          className="text-xl text-[#1C1C1C] tracking-wide"
+          className="text-xl text-gray-900 tracking-wide"
         >
           FH
         </Link>
@@ -14,21 +14,21 @@ export default function Nav() {
         <div className="flex space-x-12 items-center">
           <Link 
             href="/about" 
-            className="text-[#1C1C1C]/80 hover:text-[#1C1C1C] transition-colors hover-underline"
+            className="text-gray-600 hover:text-gray-900 transition-colors"
           >
             About
           </Link>
           <Link 
             href="/sponsorship" 
-            className="text-[#1C1C1C]/80 hover:text-[#1C1C1C] transition-colors hover-underline"
+            className="text-gray-600 hover:text-gray-900 transition-colors"
           >
             Sponsorship
           </Link>
             
           <Link
             href="/apply"
-            className="text-[#1C1C1C] border border-[#1C1C1C] px-5 py-2 rounded 
-              hover:bg-[#1C1C1C] hover:text-white transition-colors"
+            className="text-gray-900 border border-gray-900 px-5 py-2 rounded 
+              hover:bg-gray-900 hover:text-white transition-colors"
           >
             Apply Now
           </Link>
