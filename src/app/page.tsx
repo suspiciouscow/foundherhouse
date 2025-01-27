@@ -11,7 +11,7 @@ export default function Home() {
   const faqs = [
     {
       question: "What is FoundHer House?",
-      answer: "FoundHer House is an all-women hacker house located in San Francisco. We offer flexible stays with options for one-month residencies or full summer programs, creating an ideal environment for innovation and growth."
+      answer: "FoundHer House is an all-women hacker house located in San Francisco. Residents work on projects and startups while connecting with like-minded individuals. The house hosts workshops, networking events, and demo nights to foster collaboration and skill-sharing among participants."
     },
     {
       question: "Who can apply?",
@@ -45,7 +45,7 @@ export default function Home() {
         {/* Hero Section */}
         <div className="flex flex-col items-center justify-center text-center pt-15 animate-fade-in">
           {/* Logo */}
-          <div className="mb-0">
+          <div className="mb-[-2rem]">
             <img src="/foundher-logo.png" alt="FoundHer House" className="h-48" />
           </div>
   
@@ -59,6 +59,7 @@ export default function Home() {
             <div className="text-[#191A1B] font-playfair -mt-5 leading-[1.3]">ventures</div>
           </h1>
         </div>
+
           {/* Mission Statement */}
           <p className="text-[#494949] text-lg max-w-2xl mb-10 leading-relaxed">
             A curated community and living space for female founders 
