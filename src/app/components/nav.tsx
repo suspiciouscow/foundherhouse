@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Nav() {
   return (
@@ -8,7 +9,13 @@ export default function Nav() {
           href="/" 
           className="text-xl text-gray-900 tracking-wide"
         >
-          FH
+          <Image 
+            src="/logo.png"  // Replace with your actual logo path
+            alt="FH Logo" 
+            width={30}  // Adjust width as needed
+            height={50}  // Adjust height as needed
+            className="h-8"  // Adjust sizing as needed
+          />
         </Link>
 
         <div className="flex space-x-12 items-center">

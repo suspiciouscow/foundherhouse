@@ -41,11 +41,11 @@ export default function Home() {
       
       <Nav />
   
-      <main className="container mx-auto px-4">
+      <main className="container mx-auto px-3">
         {/* Hero Section */}
-        <div className="flex flex-col items-center justify-center text-center pt-10 animate-fade-in">
+        <div className="flex flex-col items-center justify-center text-center pt-15 animate-fade-in">
           {/* Logo */}
-          <div className="mb-3">
+          <div className="mb-0">
             <img src="/foundher-logo.png" alt="FoundHer House" className="h-48" />
           </div>
   
