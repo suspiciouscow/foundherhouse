@@ -3,27 +3,21 @@
 import { useState } from 'react'
 import Nav from '@/app/components/nav'
 import { Sparkles } from 'lucide-react'
-import { createClient } from '@supabase/supabase-js'
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
 
 interface FormData {
-  fullName: string;
+  full_name: string;
   email: string;
   project: string;
   about: string;
-  unique: string;
+  unique_fact: string;
 }
 
 interface FormErrors {
-  fullName?: string;
+  full_name?: string;
   email?: string;
   project?: string;
   about?: string;
-  unique?: string;
+  unique_fact?: string;
   submit?: string;
 }
 
@@ -35,11 +29,11 @@ const WORD_LIMITS = {
 
 export default function Apply() {
   const [formData, setFormData] = useState<FormData>({
-    fullName: '',
+    full_name: '',
     email: '',
     project: '',
     about: '',
-    unique: ''
+    unique_fact: ''
   })
 
   const [errors, setErrors] = useState<FormErrors>({})
@@ -53,8 +47,8 @@ export default function Apply() {
   const validateForm = () => {
     const newErrors: FormErrors = {}
     
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required'
+    if (!formData.full_name.trim()) {
+      newErrors.full_name = 'Full name is required'
     }
     
     if (!formData.email.trim()) {
@@ -75,10 +69,10 @@ export default function Apply() {
       newErrors.about = `Please keep your response under ${WORD_LIMITS.about} words`
     }
 
-    if (!formData.unique.trim()) {
-      newErrors.unique = 'Please tell us something unique about yourself'
-    } else if (getWordCount(formData.unique) > WORD_LIMITS.unique) {
-      newErrors.unique = `Please keep your response under ${WORD_LIMITS.unique} words`
+    if (!formData.unique_fact.trim()) {
+      newErrors.unique_fact = 'Please tell us something unique about yourself'
+    } else if (getWordCount(formData.unique_fact) > WORD_LIMITS.unique) {
+      newErrors.unique_fact = `Please keep your response under ${WORD_LIMITS.unique} words`
     }
 
     setErrors(newErrors)
@@ -86,68 +80,73 @@ export default function Apply() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     
     if (WORD_LIMITS.hasOwnProperty(name as keyof typeof WORD_LIMITS)) {
-      const wordCount = getWordCount(value)
-      const limit = WORD_LIMITS[name as keyof typeof WORD_LIMITS]
+      const wordCount = getWordCount(value);
+      const limit = WORD_LIMITS[name as keyof typeof WORD_LIMITS];
       if (wordCount > limit) {
         setErrors(prev => ({
           ...prev,
           [name]: `Please keep your response under ${limit} words`
-        }))
+        }));
       } else {
         setErrors(prev => ({
           ...prev,
           [name]: ''
-        }))
+        }));
       }
     }
     
     setFormData(prev => ({
       ...prev,
       [name]: value
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!validateForm()) return
-    setIsSubmitting(true)
+    e.preventDefault();
+    if (!validateForm()) return;
+    setIsSubmitting(true);
     
     try {
-      const { error } = await supabase
-        .from('applications')
-        .insert({
-          full_name: formData.fullName,
+      const response = await fetch('/api/applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          full_name: formData.full_name,
           email: formData.email,
           project: formData.project,
           about: formData.about,
-          unique_fact: formData.unique,
+          unique_fact: formData.unique_fact,
           submitted_at: new Date().toISOString(),
           status: 'pending'
         })
+      });
 
-      if (error) throw error
-
-      setSubmitSuccess(true)
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit');
+      }
+      
+      setSubmitSuccess(true);
       setFormData({
-        fullName: '',
+        full_name: '',
         email: '',
         project: '',
         about: '',
-        unique: ''
-      })
-    } catch (error) {
-      console.error('Submission error:', error)
+        unique_fact: ''
+      });
+    } catch (error: any) {
       setErrors(prev => ({
         ...prev,
-        submit: error instanceof Error ? error.message : 'Failed to submit application'
-      }))
+        submit: error.message || 'Failed to submit application'
+      }));
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
@@ -177,17 +176,17 @@ export default function Apply() {
               <label className="block text-main font-medium mb-2">Full Name</label>
               <input 
                 type="text"
-                name="fullName"
-                value={formData.fullName}
+                name="full_name"
+                value={formData.full_name}
                 onChange={handleChange}
                 className={`w-full p-3 rounded-lg bg-white text-main border 
-                  ${errors.fullName ? 'border-red-500' : 'border-primary/10'}
+                  ${errors.full_name ? 'border-red-500' : 'border-primary/10'}
                   focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary 
                   transition-colors placeholder:text-main/40`}
                 placeholder="Enter your full name"
               />
-              {errors.fullName && (
-                <p className="mt-1 text-red-500 text-sm">{errors.fullName}</p>
+              {errors.full_name && (
+                <p className="mt-1 text-red-500 text-sm">{errors.full_name}</p>
               )}
             </div>
 
@@ -261,19 +260,19 @@ export default function Apply() {
                 <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.unique} words max)</span>
               </label>
               <textarea 
-                name="unique"
-                value={formData.unique}
+                name="unique_fact"
+                value={formData.unique_fact}
                 onChange={handleChange}
                 className={`w-full p-3 rounded-lg bg-white text-main border 
-                  ${errors.unique ? 'border-red-500' : 'border-primary/10'}
+                  ${errors.unique_fact ? 'border-red-500' : 'border-primary/10'}
                   focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary 
                   transition-colors placeholder:text-main/40 h-32 resize-none`}
                 placeholder="Tell us something interesting or unique about yourself"
               />
               <div className="flex justify-between mt-1">
-                <p className={errors.unique ? "text-red-500 text-sm" : "hidden"}>{errors.unique}</p>
+                <p className={errors.unique_fact ? "text-red-500 text-sm" : "hidden"}>{errors.unique_fact}</p>
                 <p className="text-main-muted text-sm ml-auto">
-                  {getWordCount(formData.unique)}/{WORD_LIMITS.unique} words
+                  {getWordCount(formData.unique_fact)}/{WORD_LIMITS.unique} words
                 </p>
               </div>
             </div>

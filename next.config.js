@@ -1,11 +1,9 @@
-import NextConfig from "next";
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Remove output: 'export' since you want to use API routes
   images: {
-    unoptimized: true // This is needed when using export
+    domains: ['your-domain.com'], // Add any image domains you need
   },
-  // keep any other config options you might add later
-};
+}
 
-export default nextConfig;
+module.exports = nextConfig

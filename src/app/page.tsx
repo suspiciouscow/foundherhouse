@@ -45,7 +45,7 @@ export default function Home() {
         {/* Hero Section */}
         <div className="flex flex-col items-center justify-center text-center pt-10 animate-fade-in">
           {/* Logo */}
-          <div className="mb-6">
+          <div className="mb-3">
             <img src="/foundher-logo.png" alt="FoundHer House" className="h-48" />
           </div>
   
