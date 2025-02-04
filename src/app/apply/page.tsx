@@ -253,7 +253,7 @@ export default function Apply() {
               <div className="flex justify-between mt-1">
                 <p className={errors.project ? "text-red-500 text-sm" : "hidden"}>{errors.project}</p>
                 <p className="text-main-muted text-sm ml-auto">
-                  {getWordCount(formData.project)}/{WORD_LIMITS.project} words
+                  {getWordCount(formData.project)}/{WORD_LIMITS.project} 
                 </p>
               </div>
             </div>
@@ -276,7 +276,7 @@ export default function Apply() {
               <div className="flex justify-between mt-1">
                 <p className={errors.about ? "text-red-500 text-sm" : "hidden"}>{errors.about}</p>
                 <p className="text-main-muted text-sm ml-auto">
-                  {getWordCount(formData.about)}/{WORD_LIMITS.about} words
+                  {getWordCount(formData.about)}/{WORD_LIMITS.about} 
                 </p>
               </div>
             </div>
@@ -299,7 +299,7 @@ export default function Apply() {
               <div className="flex justify-between mt-1">
                 <p className={errors.unique_fact ? "text-red-500 text-sm" : "hidden"}>{errors.unique_fact}</p>
                 <p className="text-main-muted text-sm ml-auto">
-                  {getWordCount(formData.unique_fact)}/{WORD_LIMITS.unique}
+                  {getWordCount(formData.unique_fact)}/{WORD_LIMITS.unique} 
                 </p>
               </div>
             </div>
