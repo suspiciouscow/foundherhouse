@@ -77,44 +77,6 @@ export default function About() {
             </div>
           </section>
 
-          {/* Values Section */}
-          <section>
-            <h2 className="text-2xl text-[#191A1B] font-medium font-playfair mb-12 text-center">
-              Our Values
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-x-16 gap-y-12">
-              {[
-                {
-                  title: "Innovation",
-                  description: "Embracing new ideas and creative solutions"
-                },
-                {
-                  title: "Community",
-                  description: "Supporting and empowering each other"
-                },
-                {
-                  title: "Growth",
-                  description: "Continuous learning and development"
-                },
-                {
-                  title: "Impact",
-                  description: "Creating meaningful change in tech"
-                }
-              ].map((value, index) => (
-                <div key={index} className="group relative">
-                  <div className="absolute -left-4 top-0 w-[2px] h-0 bg-[#AE3B46]/10 
-                    group-hover:h-full transition-all duration-300"></div>
-                  <div className="space-y-3 pl-4">
-                    <h3 className="text-[#191A1B] font-playfair text-lg group-hover:text-[#AE3B46] transition-colors">
-                      {value.title}
-                    </h3>
-                    <p className="text-[#494949] leading-relaxed">{value.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
           {/* CTA Section */}
           <section className="text-center pt-8">
             <p className="text-[#494949] mb-8 text-lg">
