@@ -11,7 +11,7 @@ export default function Home() {
   const faqs = [
     {
       question: "What is FoundHer House?",
-      answer: "FoundHer House is an all-women hacker house located in San Francisco. Residents work on projects and startups while connecting with like-minded individuals. The house hosts workshops, networking events, and demo nights to foster collaboration and skill-sharing among participants."
+      answer: "Foundher House is an all-women hacker house located in San Francisco. Residents work on projects and startups while connecting with like-minded individuals. The house hosts workshops, networking events, and demo nights to foster collaboration and skill-sharing among participants."
     },
     {
       question: "Who can apply?",

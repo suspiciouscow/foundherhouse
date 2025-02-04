@@ -10,6 +10,7 @@ interface FormData {
   project: string;
   about: string;
   unique_fact: string;
+  social_links: string;
 }
 
 interface FormErrors {
@@ -18,14 +19,17 @@ interface FormErrors {
   project?: string;
   about?: string;
   unique_fact?: string;
+  social_links?: string;
   submit?: string;
 }
 
 const WORD_LIMITS = {
   project: 200,
-  about: 300,
+  about: 250, // Changed from 300 to 250
   unique: 150
 }
+
+const URL_REGEX = /^(https?:\/\/)?([\w-]+(\.[\w-]+)+\/?)([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/;
 
 export default function Apply() {
   const [formData, setFormData] = useState<FormData>({
@@ -33,7 +37,8 @@ export default function Apply() {
     email: '',
     project: '',
     about: '',
-    unique_fact: ''
+    unique_fact: '',
+    social_links: ''
   })
 
   const [errors, setErrors] = useState<FormErrors>({})
@@ -75,6 +80,11 @@ export default function Apply() {
       newErrors.unique_fact = `Please keep your response under ${WORD_LIMITS.unique} words`
     }
 
+    // Simple validation for social links - just check if there's any content
+    if (formData.social_links && !formData.social_links.trim()) {
+      newErrors.social_links = 'Please provide valid URLs or remove the content';
+    }
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -114,11 +124,7 @@ export default function Apply() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          full_name: formData.full_name,
-          email: formData.email,
-          project: formData.project,
-          about: formData.about,
-          unique_fact: formData.unique_fact,
+          ...formData,
           submitted_at: new Date().toISOString(),
           status: 'pending'
         })
@@ -136,7 +142,10 @@ export default function Apply() {
         email: '',
         project: '',
         about: '',
-        unique_fact: ''
+        unique_fact: '',
+        linkedin_url: '',
+        github_url: '',
+        portfolio_url: ''
       });
     } catch (error: any) {
       setErrors(prev => ({
@@ -210,6 +219,26 @@ export default function Apply() {
 
             <div>
               <label className="block text-main font-medium mb-2">
+                Social Links
+                <span className="text-main-muted text-sm ml-2">(optional)</span>
+              </label>
+              <textarea
+                name="social_links"
+                value={formData.social_links}
+                onChange={handleChange}
+                className={`w-full p-3 rounded-lg bg-white text-main border 
+                  ${errors.social_links ? 'border-red-500' : 'border-primary/10'}
+                  focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary 
+                  transition-colors placeholder:text-main/40 h-24 resize-none`}
+                placeholder="Paste your relevant links (LinkedIn, GitHub, portfolio, etc.)"
+              />
+              {errors.social_links && (
+                <p className="mt-1 text-red-500 text-sm">{errors.social_links}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-main font-medium mb-2">
                 What is the most impressive thing you&apos;ve worked on?
                 <span className="text-main-muted text-sm ml-2">({WORD_LIMITS.project} words max)</span>
               </label>
@@ -272,7 +301,7 @@ export default function Apply() {
               <div className="flex justify-between mt-1">
                 <p className={errors.unique_fact ? "text-red-500 text-sm" : "hidden"}>{errors.unique_fact}</p>
                 <p className="text-main-muted text-sm ml-auto">
-                  {getWordCount(formData.unique_fact)}/{WORD_LIMITS.unique} words
+                  {getWordCount(formData.unique_fact)}/{WORD_LIMITS.unique}
                 </p>
               </div>
             </div>
