@@ -143,9 +143,7 @@ export default function Apply() {
         project: '',
         about: '',
         unique_fact: '',
-        linkedin_url: '',
-        github_url: '',
-        portfolio_url: ''
+        social_links: ''
       });
     } catch (error: any) {
       setErrors(prev => ({
