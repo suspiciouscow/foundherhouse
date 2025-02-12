@@ -27,7 +27,7 @@ export default function Home() {
     },
     {
       question: "Do I need to have an established startup?",
-      answer: "Not at all! We welcome anyone with a passion for innovation and entrepreneurship. Whether you're building your own venture or working on projects within a company, what matters is your drive to create and innovate."
+      answer: "Not at all! However we do prefer you to have startup experience. What matters to us the most is your drive to create and innovate."
     },
     {
       question: "What community and networking opportunities are available?",
