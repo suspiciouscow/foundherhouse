@@ -23,7 +23,7 @@ export default function Home() {
     },
     {
       question: "What are the costs involved?",
-      answer: "Thanks to our partnerships with sponsors and VCs, we're able to offer subsidized housing at approximately $800 per month, making it accessible for early-stage founders and builders."
+      answer: "Thanks to our partnerships with sponsors and VCs, we're able to offer subsidized housing at approximately $800-$1000 per month, making it accessible for early-stage founders and builders."
     },
     {
       question: "Do I need to have an established startup?",
