@@ -168,7 +168,7 @@ export default function Apply() {
             <span className="text-main font-playfair">Apply Now</span>
           </h1>
           <p className="text-main-muted text-lg max-w-2xl mb-12 leading-relaxed">
-            Join our community of ambitious women founders and innovators
+            Join our community of ambitious women founders and innovators - DUE MARCH 7TH 11:59PM PST
           </p>
         </div>
 
