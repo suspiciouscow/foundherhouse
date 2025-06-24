@@ -2,6 +2,7 @@
 
 import Nav from '@/app/components/nav'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Sparkles } from 'lucide-react'
 
 export default function About() {
@@ -25,6 +26,24 @@ export default function About() {
         </div>
 
         <div className="max-w-3xl mx-auto space-y-24 pb-24">
+          {/* House Photo Section */}
+          <section className="text-center">
+            <div className="relative w-full max-w-4xl mx-auto">
+              <Image
+                src="/FullSizeRender.JPG"
+                alt="FoundHer House community"
+                width={800}
+                height={600}
+                className="rounded-2xl shadow-lg"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+            </div>
+            <p className="text-[#494949] text-sm mt-4 italic">
+             FoundHer House Residents (Summer 2025)
+            </p>
+          </section>
+
           {/* Our Story Section */}
           <section className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-white/50 to-transparent rounded-2xl"></div>
