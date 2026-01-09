@@ -21,12 +21,6 @@ export default function Nav() {
             About
           </Link>
           <Link 
-            href="/residents" 
-            className="text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            Residents
-          </Link>
-          <Link 
             href="/sponsorship" 
             className="text-gray-600 hover:text-gray-900 transition-colors"
           >
