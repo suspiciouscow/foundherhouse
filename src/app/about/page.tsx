@@ -40,8 +40,17 @@ export default function About() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
             </div>
             <p className="text-[#494949] text-sm mt-4 italic">
-             FoundHer House Residents (Summer 2025)
+              FoundHer House Residents (Summer 2025)
             </p>
+            <div className="mt-8">
+              <Link
+                href="/residents"
+                className="inline-flex items-center text-[#AE3B46] hover:text-[#8B2E37] transition-colors font-medium"
+              >
+                Meet Our Founders
+                <Sparkles className="ml-2 w-4 h-4" />
+              </Link>
+            </div>
           </section>
 
           {/* Our Story Section */}
