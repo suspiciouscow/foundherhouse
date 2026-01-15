@@ -158,7 +158,7 @@ export default function Apply() {
           impressive_thing: formData.impressive,
           fun_fact: formData.funFact,
           location_preference: formData.locationPreference,
-          relevant_links: formData.links,
+          links: formData.links,
         }),
       })
 

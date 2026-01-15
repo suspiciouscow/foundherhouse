@@ -32,7 +32,7 @@ export async function POST(req: Request) {
         impressive_thing: body.impressive_thing,
         fun_fact: body.fun_fact,
         location_preference: body.location_preference,
-        relevant_links: body.relevant_links || '',
+        links: body.links || '',
         submitted_at: new Date().toISOString(),
         status: 'pending'
       })
