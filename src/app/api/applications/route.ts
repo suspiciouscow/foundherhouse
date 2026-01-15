@@ -15,7 +15,8 @@ export async function POST(req: Request) {
     const body = await req.json()
     
     // Validate required fields
-    if (!body.full_name || !body.email) {
+    if (!body.full_name || !body.age || !body.startup_description || 
+        !body.impressive_thing || !body.fun_fact || !body.location_preference) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -25,7 +26,13 @@ export async function POST(req: Request) {
     const { data, error } = await supabase
       .from('applications')
       .insert({
-        ...body,
+        full_name: body.full_name,
+        age: body.age,
+        startup_description: body.startup_description,
+        impressive_thing: body.impressive_thing,
+        fun_fact: body.fun_fact,
+        location_preference: body.location_preference,
+        relevant_links: body.relevant_links || '',
         submitted_at: new Date().toISOString(),
         status: 'pending'
       })
