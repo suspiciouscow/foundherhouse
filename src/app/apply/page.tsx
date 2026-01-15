@@ -87,6 +87,11 @@ export default function Apply() {
     if (!formData.locationPreference) {
       newErrors.locationPreference = 'Please select your location preference'
     }
+
+    // Validate links length (250 character limit from database constraint)
+    if (formData.links && formData.links.length >= 250) {
+      newErrors.links = 'Links must be less than 250 characters'
+    }
     
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -108,6 +113,19 @@ export default function Apply() {
         setErrors(prev => ({
           ...prev,
           [name]: ''
+        }))
+      }
+    } else if (name === 'links') {
+      // Validate links length (250 character limit from database constraint)
+      if (value.length >= 250) {
+        setErrors(prev => ({
+          ...prev,
+          links: 'Links must be less than 250 characters'
+        }))
+      } else {
+        setErrors(prev => ({
+          ...prev,
+          links: ''
         }))
       }
     } else {
@@ -382,6 +400,7 @@ export default function Apply() {
             <div>
               <label className="block text-main font-medium mb-2">
                 Paste Relevant Links (LinkedIn, Portfolio, Github, X/Twitter)
+                <span className="text-main-muted text-sm ml-2">(250 characters max)</span>
               </label>
               <textarea 
                 name="links"
@@ -393,9 +412,12 @@ export default function Apply() {
                   transition-colors placeholder:text-main/40 h-24 resize-none`}
                 placeholder="Paste links separated by commas or line breaks"
               />
-              {errors.links && (
-                <p className="mt-1 text-red-500 text-sm">{errors.links}</p>
-              )}
+              <div className="flex justify-between mt-1">
+                <p className={errors.links ? "text-red-500 text-sm" : "hidden"}>{errors.links}</p>
+                <p className="text-main-muted text-sm ml-auto">
+                  {formData.links.length}/250 characters
+                </p>
+              </div>
             </div>
 
             {errors.submit && (
