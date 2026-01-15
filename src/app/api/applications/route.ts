@@ -14,6 +14,9 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
     
+    // Log what we're receiving
+    console.log('Received application data:', JSON.stringify(body, null, 2))
+    
     // Validate required fields
     if (!body.full_name || !body.age || !body.startup_description || 
         !body.impressive_thing || !body.fun_fact || !body.location_preference) {
@@ -23,25 +26,44 @@ export async function POST(req: Request) {
       )
     }
 
+    // Prepare insert data - only include fields that might exist
+    const insertData: any = {
+      full_name: body.full_name,
+      age: body.age,
+      startup_description: body.startup_description,
+      impressive_thing: body.impressive_thing,
+      fun_fact: body.fun_fact,
+      location_preference: body.location_preference,
+    }
+
+    // Only add optional fields if they have values
+    if (body.links) {
+      insertData.links = body.links
+    }
+
+    // Add timestamp if column exists
+    insertData.submitted_at = new Date().toISOString()
+    
+    // Add status if column exists
+    insertData.status = 'pending'
+
+    console.log('Inserting data:', JSON.stringify(insertData, null, 2))
+
     const { data, error } = await supabase
       .from('applications')
-      .insert({
-        full_name: body.full_name,
-        age: body.age,
-        startup_description: body.startup_description,
-        impressive_thing: body.impressive_thing,
-        fun_fact: body.fun_fact,
-        location_preference: body.location_preference,
-        links: body.links || '',
-        submitted_at: new Date().toISOString(),
-        status: 'pending'
-      })
+      .insert(insertData)
       .select()
 
     if (error) {
       console.error('Supabase error:', error)
+      console.error('Error details:', JSON.stringify(error, null, 2))
       return NextResponse.json(
-        { error: 'Database error', details: error.message },
+        { 
+          error: 'Database error', 
+          details: error.message,
+          hint: error.hint,
+          code: error.code
+        },
         { status: 500 }
       )
     }

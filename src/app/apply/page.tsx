@@ -164,7 +164,11 @@ export default function Apply() {
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to submit application')
+        console.error('API Error:', errorData)
+        const errorMessage = errorData.details 
+          ? `${errorData.error}: ${errorData.details}${errorData.hint ? ` (${errorData.hint})` : ''}` 
+          : errorData.error || 'Failed to submit application'
+        throw new Error(errorMessage)
       }
 
       setSubmitSuccess(true)
