@@ -6,6 +6,7 @@ import { useState } from 'react'
 
 interface FormData {
   fullName: string;
+  email: string;
   age: string;
   startup: string;
   impressive: string;
@@ -16,6 +17,7 @@ interface FormData {
 
 interface FormErrors {
   fullName?: string;
+  email?: string;
   age?: string;
   startup?: string;
   impressive?: string;
@@ -34,6 +36,7 @@ const WORD_LIMITS = {
 export default function Apply() {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
+    email: '',
     age: '',
     startup: '',
     impressive: '',
@@ -55,6 +58,10 @@ export default function Apply() {
     
     if (!formData.fullName.trim()) {
       newErrors.fullName = 'Please enter your full name'
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Please enter your email address'
     }
     
     if (!formData.age.trim()) {
@@ -171,6 +178,7 @@ export default function Apply() {
         },
         body: JSON.stringify({
           full_name: formData.fullName,
+          email: formData.email,
           age: parseInt(formData.age),
           startup_description: formData.startup,
           impressive_thing: formData.impressive,
@@ -192,6 +200,7 @@ export default function Apply() {
       setSubmitSuccess(true)
       setFormData({
         fullName: '',
+        email: '',
         age: '',
         startup: '',
         impressive: '',
@@ -270,6 +279,27 @@ export default function Apply() {
               />
               {errors.fullName && (
                 <p className="mt-1 text-red-500 text-sm">{errors.fullName}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-main font-medium mb-2">
+                Email *
+              </label>
+              <input 
+                type="text"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`w-full p-3 rounded-lg bg-white text-main border 
+                  ${errors.email ? 'border-red-500' : 'border-primary/10'}
+                  focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary 
+                  transition-colors placeholder:text-main/40`}
+                placeholder="your.email@example.com"
+              />
+              {errors.email && (
+                <p className="mt-1 text-red-500 text-sm">{errors.email}</p>
               )}
             </div>
 
