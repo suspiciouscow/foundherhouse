@@ -13,6 +13,7 @@ interface FormData {
   funFact: string;
   locationPreference: string;
   links: string;
+  referralSource: string;
 }
 
 interface FormErrors {
@@ -42,7 +43,8 @@ export default function Apply() {
     impressive: '',
     funFact: '',
     locationPreference: '',
-    links: ''
+    links: '',
+    referralSource: ''
   })
 
   const [errors, setErrors] = useState<FormErrors>({})
@@ -185,6 +187,7 @@ export default function Apply() {
           fun_fact: formData.funFact,
           location_preference: formData.locationPreference,
           links: formData.links,
+          referral_source: formData.referralSource,
         }),
       })
 
@@ -206,7 +209,8 @@ export default function Apply() {
         impressive: '',
         funFact: '',
         locationPreference: '',
-        links: ''
+        links: '',
+        referralSource: ''
       })
     } catch (error) {
       setErrors(prev => ({
@@ -448,6 +452,22 @@ export default function Apply() {
                   {formData.links.length}/250 characters
                 </p>
               </div>
+            </div>
+
+            <div>
+              <label className="block text-main font-medium mb-2">
+                How did you hear about FoundHer House? Were you referred by anyone?
+              </label>
+              <textarea 
+                name="referralSource"
+                value={formData.referralSource}
+                onChange={handleChange}
+                className={`w-full p-3 rounded-lg bg-white text-main border 
+                  border-primary/10
+                  focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary 
+                  transition-colors placeholder:text-main/40 h-24 resize-none`}
+                placeholder="Optional: Tell us how you heard about FoundHer House"
+              />
             </div>
 
             {errors.submit && (
