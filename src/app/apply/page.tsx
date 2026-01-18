@@ -238,7 +238,7 @@ export default function Apply() {
               along with FOX, GeekWire, Apple, The Atlantic, and more.
             </p>
             <p>
-              Last summer, residents collectively raised over $6.5M in funding, reached billions of people, and built 
+              Last summer, residents collectively raised over $7M in funding, reached billions of people, and built 
               companies with hundreds of thousands of users across industries from healthcare to consumer social. 
               FoundHer House is designed to reduce the cost and isolation of early-stage building while concentrating 
               serious founders in a high-trust, high-output environment.
