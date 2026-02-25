@@ -34,6 +34,8 @@ const WORD_LIMITS = {
   funFact: 150
 }
 
+const APPLICATIONS_CLOSED = true
+
 export default function Apply() {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
@@ -250,7 +252,29 @@ export default function Apply() {
           </div>
         </div>
         
-        {submitSuccess ? (
+        {APPLICATIONS_CLOSED ? (
+          <div className="max-w-2xl mx-auto p-8 bg-primary/10 rounded-lg text-center backdrop-blur-sm space-y-6">
+            <h2 className="text-2xl text-main font-playfair">Applications are closed</h2>
+            <p className="text-main-muted leading-relaxed">
+              Applications closed at 11:59pm on February 24th.
+            </p>
+            <p className="text-main-muted leading-relaxed">
+              For any questions, email us at{' '}
+              <a href="mailto:contact@foundherhouse.org" className="text-primary hover:underline">
+                contact@foundherhouse.org
+              </a>
+              , or contact us @foundherhouse on{' '}
+              <a href="https://x.com/foundherhouse" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                X
+              </a>
+              {' '}and{' '}
+              <a href="https://instagram.com/foundherhouse" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                Instagram
+              </a>
+              .
+            </p>
+          </div>
+        ) : submitSuccess ? (
           <div className="max-w-2xl mx-auto p-8 bg-primary/10 rounded-lg text-center backdrop-blur-sm">
             <h2 className="text-2xl text-main mb-4 font-playfair">Application Submitted!</h2>
             <p className="text-main-muted leading-relaxed mb-6">
