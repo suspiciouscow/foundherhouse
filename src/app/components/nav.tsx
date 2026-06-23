@@ -14,19 +14,43 @@ export default function Nav() {
         </Link>
 
         <div className="flex space-x-12 items-center">
-          <Link 
-            href="/about" 
+          <Link
+            href="/about"
             className="text-gray-600 hover:text-gray-900 transition-colors"
           >
             About
           </Link>
-          <Link 
-            href="/sponsorship" 
+
+          <Link
+            href="/residents"
             className="text-gray-600 hover:text-gray-900 transition-colors"
           >
-            Sponsorship
+            Residents
           </Link>
-            
+
+          <Link
+            href="/sponsorship"
+            className="text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            Sponsors
+          </Link>
+
+          <Link
+            href="/press"
+            className="text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            Press
+          </Link>
+
+          <a
+            href="https://luma.com/calendar/cal-DFxxla4CNZhO96B"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            Events
+          </a>
+
           <Link
             href="/apply"
             className="text-gray-900 border border-gray-900 px-5 py-2 rounded 

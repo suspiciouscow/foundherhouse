@@ -96,6 +96,25 @@ export default function About() {
             </div>
           </section>
 
+          {/* Residents Section */}
+          <section className="text-center">
+            <h2 className="text-2xl text-[#191A1B] font-medium font-playfair mb-4">
+              Our Residents
+            </h2>
+            <p className="text-[#494949] text-lg leading-relaxed mb-6 max-w-2xl mx-auto">
+              From our inaugural San Francisco cohort to today, FoundHer House has been home to a
+              growing community of women founders and builders.
+            </p>
+            <Link
+              href="/residents"
+              className="group inline-flex items-center gap-2 text-[#AE3B46] font-playfair text-lg
+                hover:gap-3 transition-all duration-300"
+            >
+              Meet our residents
+              <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>
+            </Link>
+          </section>
+
           {/* CTA Section */}
           <section className="text-center pt-8">
             <p className="text-[#494949] mb-8 text-lg">

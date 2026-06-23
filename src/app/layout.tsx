@@ -1,12 +1,19 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Outfit, Playfair_Display } from 'next/font/google'
+import { Outfit, Playfair_Display, Allura } from 'next/font/google'
+import Footer from '@/app/components/footer'
 
 const outfit = Outfit({ subsets: ['latin'] })
-const playfair = Playfair_Display({ 
+const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
   weight: ['400', '500', '600', '700'],
+})
+// Cursive script to echo the "her" in the FoundHer logo.
+const allura = Allura({
+  subsets: ['latin'],
+  variable: '--font-script',
+  weight: '400',
 })
 
 export const metadata: Metadata = {
@@ -26,7 +33,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${outfit.className} ${playfair.variable}`}>{children}</body>
+      <body className={`${outfit.className} ${playfair.variable} ${allura.variable}`}>
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }

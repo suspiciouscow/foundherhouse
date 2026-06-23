@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Nav from '@/app/components/nav'
 import { useState } from 'react'
 import { ChevronDown, Sparkles, Mail, Instagram } from 'lucide-react'
+import { pressItems } from '@/lib/press'
 
 export default function Home() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -82,6 +83,39 @@ export default function Home() {
             </div>
           </Link>
         </div>
+
+        {/* Featured In Strip */}
+        <section className="pb-16 pt-4">
+          <div className="max-w-5xl mx-auto text-center">
+            <p className="text-xs uppercase tracking-[0.2em] text-[#494949]/70 mb-8">
+              As Featured In
+            </p>
+            <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-x-5 sm:gap-x-8 md:gap-x-10 gap-y-5">
+              {pressItems.map((item) => (
+                <a
+                  key={item.url}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Read about FoundHer House in ${item.publication}`}
+                  className="block shrink-0"
+                >
+                  <img
+                    src={item.logo}
+                    alt={item.publication}
+                    className="h-4 sm:h-5 md:h-6 w-auto object-contain opacity-60 grayscale
+                      transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+                  />
+                </a>
+              ))}
+            </div>
+            <div className="mt-8">
+              <Link href="/press" className="text-sm text-[#AE3B46] hover:underline">
+                See all press &rarr;
+              </Link>
+            </div>
+          </div>
+        </section>
 
         {/* FAQ Section */}
         <section className="py-24 relative">
