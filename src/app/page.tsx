@@ -90,24 +90,26 @@ export default function Home() {
             <p className="text-xs uppercase tracking-[0.2em] text-[#494949]/70 mb-8">
               As Featured In
             </p>
-            <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-x-5 sm:gap-x-8 md:gap-x-10 gap-y-5">
-              {pressItems.map((item) => (
-                <a
-                  key={item.url}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Read about FoundHer House in ${item.publication}`}
-                  className="block shrink-0"
-                >
-                  <img
-                    src={item.logo}
-                    alt={item.publication}
-                    className="h-4 sm:h-5 md:h-6 w-auto object-contain opacity-60 grayscale
-                      transition-all duration-300 hover:opacity-100 hover:grayscale-0"
-                  />
-                </a>
-              ))}
+            <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+              <div className="flex w-max animate-marquee items-center">
+                {[...pressItems, ...pressItems, ...pressItems].map((item, i) => (
+                  <a
+                    key={i}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Read about FoundHer House in ${item.publication}`}
+                    className="block shrink-0 mx-6 md:mx-9"
+                  >
+                    <img
+                      src={item.logo}
+                      alt={item.publication}
+                      className="h-5 md:h-6 w-auto object-contain opacity-60 grayscale
+                        transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+                    />
+                  </a>
+                ))}
+              </div>
             </div>
             <div className="mt-8">
               <Link href="/press" className="text-sm text-[#AE3B46] hover:underline">

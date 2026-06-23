@@ -52,8 +52,8 @@ function SocialLinks({ person, className = '' }: { person: Person; className?: s
 // strip); without one, the firm name renders as a clean wordmark.
 const backers: { name: string; logo?: string; className?: string }[] = [
   { name: 'a16z', logo: '/backers/a16z.svg', className: 'h-5 md:h-6' },
-  { name: 'Pear VC', logo: '/backers/pear.png', className: 'h-9 md:h-10' },
-  { name: 'Neo', logo: '/backers/neo.png', className: 'h-8 md:h-9' },
+  { name: 'Pear VC', logo: '/backers/pear.svg', className: 'h-9 md:h-11' },
+  { name: 'Neo', logo: '/backers/neo.png', className: 'h-6 md:h-7' },
   { name: 'Uncork Capital', logo: '/backers/uncork.png', className: 'h-5 md:h-6' },
   { name: 'Genius Ventures' },
 ]
