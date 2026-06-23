@@ -32,7 +32,7 @@ export default function Nav() {
             href="/sponsorship"
             className="text-gray-600 hover:text-gray-900 transition-colors"
           >
-            Sponsors
+            Supporters
           </Link>
 
           <Link

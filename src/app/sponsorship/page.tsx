@@ -23,7 +23,7 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
   }, [])
   const showPhoto = sponsor.photo && imgOk
   return (
-    <div className="group flex flex-col items-center text-center">
+    <div className="group flex flex-col items-center text-center w-40">
       <div className="relative w-28 h-28 mb-4 rounded-full p-1.5 bg-[#AE3B46]/10
         ring-2 ring-[#AE3B46]/20 transition-all duration-300
         group-hover:ring-[#AE3B46]/50 group-hover:-translate-y-1 group-hover:shadow-lg">
@@ -100,12 +100,12 @@ export default function Sponsorship() {
           {/* Our Sponsors Section */}
           <div className="mb-24">
             <h2 className="text-2xl text-[#191A1B] font-medium font-playfair mb-3 text-center">
-              Our Sponsors
+              Our Supporters
             </h2>
             <p className="text-[#494949] text-center mb-12 max-w-xl mx-auto">
-              We&apos;re grateful to the House Sponsors who make FoundHer House possible.
+              We&apos;re grateful to the House Supporters who make FoundHer House possible.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-12">
+            <div className="flex flex-wrap justify-center gap-x-12 md:gap-x-16 gap-y-12">
               {sponsors.map((sponsor) => (
                 <SponsorCard key={sponsor.name} sponsor={sponsor} />
               ))}

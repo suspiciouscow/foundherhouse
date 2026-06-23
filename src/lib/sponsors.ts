@@ -27,14 +27,15 @@ export const sponsors: Sponsor[] = [
     linkedin: 'https://www.linkedin.com/in/bfeld',
     photo: '/sponsors/brad-feld.jpg',
   },
-  {
-    name: 'Ben Taft',
-    firm: 'Genius Ventures',
-    role: 'Founder & Managing Partner',
-    tier: 'House Sponsor',
-    linkedin: 'https://www.linkedin.com/in/ben-taft-46830679',
-    photo: '/sponsors/ben-taft.jpg',
-  },
+  // Temporarily removed — may add back later.
+  // {
+  //   name: 'Ben Taft',
+  //   firm: 'Genius Ventures',
+  //   role: 'Founder & Managing Partner',
+  //   tier: 'House Sponsor',
+  //   linkedin: 'https://www.linkedin.com/in/ben-taft-46830679',
+  //   photo: '/sponsors/ben-taft.jpg',
+  // },
   {
     name: 'Josh Kopelman',
     firm: 'First Round Capital',
