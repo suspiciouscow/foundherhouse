@@ -108,7 +108,7 @@ export default function Residents() {
   }
   // People who are also founders show only in the Founders section (with their
   // cohort noted there); everyone else fills the Residents grid.
-  const residents = [...byName.values()].filter((e) => !founderNames.has(e.person.name))
+  const residents = Array.from(byName.values()).filter((e) => !founderNames.has(e.person.name))
   const founderBylines = (name: string) => byName.get(name)?.bylines ?? []
 
   return (
