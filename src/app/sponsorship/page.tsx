@@ -21,17 +21,19 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
     const img = imgRef.current
     if (img && img.complete && img.naturalWidth === 0) setImgOk(false)
   }, [])
-  const showPhoto = sponsor.photo && imgOk
+  const media = sponsor.logo ?? sponsor.photo
+  const showImage = media && imgOk
+  const fallback = sponsor.logo ? sponsor.name.split(' ')[0] : getInitials(sponsor.name)
   return (
     <div className="group flex flex-col items-center text-center w-40">
       <div className="relative w-28 h-28 mb-4 rounded-full p-1.5 bg-[#AE3B46]/10
         ring-2 ring-[#AE3B46]/20 transition-all duration-300
         group-hover:ring-[#AE3B46]/50 group-hover:-translate-y-1 group-hover:shadow-lg">
-        {showPhoto ? (
+        {showImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             ref={imgRef}
-            src={sponsor.photo}
+            src={media}
             alt={sponsor.name}
             onError={() => setImgOk(false)}
             className="w-full h-full rounded-full object-cover grayscale transition-all duration-500
@@ -40,13 +42,13 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
         ) : (
           <div className="w-full h-full rounded-full bg-gradient-to-br from-[#AE3B46]/15 to-[#AE3B46]/5
             flex items-center justify-center">
-            <span className="font-playfair text-2xl text-[#AE3B46]">{getInitials(sponsor.name)}</span>
+            <span className="font-playfair text-xl text-[#AE3B46]">{fallback}</span>
           </div>
         )}
       </div>
       <h3 className="font-playfair text-lg text-[#191A1B] leading-snug">{sponsor.name}</h3>
-      <p className="text-[#494949] text-sm mt-1">{sponsor.firm}</p>
-      <p className="text-[#494949]/70 text-xs italic">{sponsor.role}</p>
+      {sponsor.firm && <p className="text-[#494949] text-sm mt-1">{sponsor.firm}</p>}
+      {sponsor.role && <p className="text-[#494949]/70 text-xs italic">{sponsor.role}</p>}
       {sponsor.linkedin && (
         <a
           href={sponsor.linkedin}

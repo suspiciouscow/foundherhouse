@@ -1,16 +1,33 @@
 export interface Sponsor {
   name: string
-  firm: string
-  role: string
-  tier: string
+  firm?: string
+  role?: string
+  tier?: string
   linkedin?: string
   photo?: string
+  logo?: string // institutional supporters show a logo instead of a headshot
 }
 
-// House Sponsors, in the order from the Investors & Sponsors export.
-// To show a headshot: drop a square image into public/sponsors/ and set the
-// `photo` path below. Without a `photo`, a clean initials placeholder is shown.
+// Supporters, in display order.
+// People: set `photo` to a square headshot in public/sponsors/ (else initials).
+// Institutions: set `logo` to an image in public/sponsors/ (shown in the circle).
 export const sponsors: Sponsor[] = [
+  {
+    name: 'Brad Feld',
+    firm: 'Techstars',
+    role: 'Co-Founder',
+    tier: 'House Sponsor',
+    linkedin: 'https://www.linkedin.com/in/bfeld',
+    photo: '/sponsors/brad-feld.jpg',
+  },
+  {
+    name: 'Josh Kopelman',
+    firm: 'First Round Capital',
+    role: 'Founder & Managing Partner',
+    tier: 'House Sponsor',
+    linkedin: 'https://www.linkedin.com/in/jkopelman',
+    photo: '/sponsors/josh-kopelman.jpg',
+  },
   {
     name: 'Marina Girgis',
     firm: 'Precursor Ventures',
@@ -20,12 +37,14 @@ export const sponsors: Sponsor[] = [
     photo: '/sponsors/marina-girgis.jpg',
   },
   {
-    name: 'Brad Feld',
-    firm: 'Techstars',
-    role: 'Co-Founder',
-    tier: 'House Sponsor',
-    linkedin: 'https://www.linkedin.com/in/bfeld',
-    photo: '/sponsors/brad-feld.jpg',
+    name: 'Alice Leung',
+    tier: 'Supporter',
+    linkedin: 'https://www.linkedin.com/in/awleung/',
+  },
+  {
+    name: 'USC Iovine & Young Academy',
+    tier: 'Institutional Supporter',
+    logo: '/sponsors/usc-iovine.png',
   },
   // Temporarily removed — may add back later.
   // {
@@ -36,14 +55,6 @@ export const sponsors: Sponsor[] = [
   //   linkedin: 'https://www.linkedin.com/in/ben-taft-46830679',
   //   photo: '/sponsors/ben-taft.jpg',
   // },
-  {
-    name: 'Josh Kopelman',
-    firm: 'First Round Capital',
-    role: 'Founder & Managing Partner',
-    tier: 'House Sponsor',
-    linkedin: 'https://www.linkedin.com/in/jkopelman',
-    photo: '/sponsors/josh-kopelman.jpg',
-  },
 ]
 
 // "Marina Girgis" -> "MG"

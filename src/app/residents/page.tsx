@@ -106,10 +106,9 @@ export default function Residents() {
       }
     }
   }
-  // People who are also founders show only in the Founders section (with their
-  // cohort noted there); everyone else fills the Residents grid.
+  // People who are also founders show only in the Founders section; everyone
+  // else fills the Residents grid.
   const residents = Array.from(byName.values()).filter((e) => !founderNames.has(e.person.name))
-  const founderBylines = (name: string) => byName.get(name)?.bylines ?? []
 
   return (
     <div className="min-h-screen bg-[#FAF7F4] relative overflow-hidden">
@@ -170,12 +169,7 @@ export default function Residents() {
                 </h2>
                 <div className="grid grid-cols-2 gap-8 max-w-md mx-auto">
                   {founders.map((founder) => (
-                    <PersonCard
-                      key={founder.name}
-                      person={founder}
-                      founder
-                      bylines={founderBylines(founder.name)}
-                    />
+                    <PersonCard key={founder.name} person={founder} founder />
                   ))}
                 </div>
               </div>

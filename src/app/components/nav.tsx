@@ -35,13 +35,6 @@ export default function Nav() {
             Supporters
           </Link>
 
-          <Link
-            href="/press"
-            className="text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            Press
-          </Link>
-
           <a
             href="https://luma.com/calendar/cal-DFxxla4CNZhO96B"
             target="_blank"

@@ -43,7 +43,7 @@ export default function Footer() {
           <div className="max-w-xs">
             <img src="/logo.png" alt="FoundHer House" className="h-9 mb-5" />
             <p className="text-[#191A1B] text-lg font-playfair leading-snug mb-6">
-              a home for ambitious women founders, builders, and creatives.
+              a home for ambitious female founders
             </p>
             <div className="flex items-center gap-5 mb-6 text-[#191A1B]">
               <a href="https://x.com/foundherhouse" target="_blank" rel="noopener noreferrer"
@@ -59,9 +59,6 @@ export default function Footer() {
                 <InstagramIcon />
               </a>
             </div>
-            <p className="text-[#494949]/60 text-sm">
-              © {new Date().getFullYear()} FoundHer House — made with love for the women building what&apos;s next.
-            </p>
           </div>
 
           {/* Links */}

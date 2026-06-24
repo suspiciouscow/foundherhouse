@@ -60,6 +60,10 @@ cohorts:
         linkedin: "https://www.linkedin.com/in/zarahk"
       - name: "Arianna Tan"
         linkedin: "https://www.linkedin.com/in/ariannatan/"
+      - name: "Radha Munver"
+        linkedin: "https://www.linkedin.com/in/radha-m-bbba08250"
+      - name: "Carolyn He"
+        linkedin: "https://www.linkedin.com/in/carolyn-he"
 
   - house: "SF"
     season: "Summer 2025"
