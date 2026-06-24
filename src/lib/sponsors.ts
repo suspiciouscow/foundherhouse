@@ -40,6 +40,7 @@ export const sponsors: Sponsor[] = [
     name: 'Alice Leung',
     tier: 'Supporter',
     linkedin: 'https://www.linkedin.com/in/awleung/',
+    photo: '/sponsors/alice-leung.jpg',
   },
   {
     name: 'USC Iovine & Young Academy',
