@@ -61,11 +61,11 @@ const backers: { name: string; logo?: string; className?: string }[] = [
 function PersonCard({
   person,
   founder = false,
-  byline,
+  bylines = [],
 }: {
   person: Person
   founder?: boolean
-  byline?: string
+  bylines?: string[]
 }) {
   return (
     <div className="group flex flex-col items-center text-center">
@@ -79,7 +79,9 @@ function PersonCard({
         {person.name}
       </h3>
       {founder && <p className="text-[#AE3B46] text-sm italic mt-1">{person.role ?? 'Founder'}</p>}
-      {byline && <p className="text-[#494949]/70 text-xs mt-1">{byline}</p>}
+      {bylines.map((b) => (
+        <p key={b} className="text-[#494949]/70 text-xs mt-1">{b}</p>
+      ))}
       <SocialLinks person={person} className="justify-center mt-2" />
     </div>
   )
@@ -87,9 +89,27 @@ function PersonCard({
 
 export default function Residents() {
   const { founders, cohorts } = getResidentsData()
-  const residents = cohorts.flatMap((c) =>
-    c.residents.map((r) => ({ person: r, byline: `${c.house} · ${c.season}` }))
-  )
+  const founderNames = new Set(founders.map((f) => f.name))
+
+  // Dedupe people across cohorts: one card per person, with each cohort listed
+  // under it. Preserves first-seen order (cohort order in the markdown).
+  const byName = new Map<string, { person: Person; bylines: string[] }>()
+  for (const c of cohorts) {
+    const byline = `${c.house} · ${c.season}`
+    for (const r of c.residents) {
+      const entry = byName.get(r.name)
+      if (entry) {
+        entry.person = { ...r, ...entry.person } // keep first-seen, fill any gaps
+        if (!entry.bylines.includes(byline)) entry.bylines.push(byline)
+      } else {
+        byName.set(r.name, { person: r, bylines: [byline] })
+      }
+    }
+  }
+  // People who are also founders show only in the Founders section (with their
+  // cohort noted there); everyone else fills the Residents grid.
+  const residents = [...byName.values()].filter((e) => !founderNames.has(e.person.name))
+  const founderBylines = (name: string) => byName.get(name)?.bylines ?? []
 
   return (
     <div className="min-h-screen bg-[#FAF7F4] relative overflow-hidden">
@@ -150,7 +170,12 @@ export default function Residents() {
                 </h2>
                 <div className="grid grid-cols-2 gap-8 max-w-md mx-auto">
                   {founders.map((founder) => (
-                    <PersonCard key={founder.name} person={founder} founder />
+                    <PersonCard
+                      key={founder.name}
+                      person={founder}
+                      founder
+                      bylines={founderBylines(founder.name)}
+                    />
                   ))}
                 </div>
               </div>
@@ -164,8 +189,8 @@ export default function Residents() {
                 Residents
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-                {residents.map(({ person, byline }) => (
-                  <PersonCard key={person.name} person={person} byline={byline} />
+                {residents.map(({ person, bylines }) => (
+                  <PersonCard key={person.name} person={person} bylines={bylines} />
                 ))}
               </div>
             </section>

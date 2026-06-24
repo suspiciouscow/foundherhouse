@@ -45,8 +45,21 @@ cohorts:
 
   - house: "NYC"
     season: "Summer 2026"
-    label: "Coming Soon"
-    residents: []
+    label: "Current Cohort"
+    residents:
+      - name: "Isabella Assefa"
+        linkedin: "https://www.linkedin.com/in/isabella-assefa-5b849a266"
+      - name: "Ava Poole"
+        linkedin: "https://www.linkedin.com/in/avapoole"
+      - name: "Sasha Surkin"
+        linkedin: "https://www.linkedin.com/in/janiesashasurkin"
+      - name: "Luna Bitar"
+        linkedin: "https://www.linkedin.com/in/lunabitar/"
+      - name: "Anantika Mannby"
+      - name: "Zarah Khondoker"
+        linkedin: "https://www.linkedin.com/in/zarahk"
+      - name: "Arianna Tan"
+        linkedin: "https://www.linkedin.com/in/ariannatan/"
 
   - house: "SF"
     season: "Summer 2025"
