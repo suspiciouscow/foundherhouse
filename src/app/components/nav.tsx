@@ -21,12 +21,14 @@ export default function Nav() {
             About
           </Link>
 
+          {/* Residents page temporarily hidden
           <Link
             href="/residents"
             className="text-gray-600 hover:text-gray-900 transition-colors"
           >
             Residents
           </Link>
+          */}
 
           <Link
             href="/sponsorship"

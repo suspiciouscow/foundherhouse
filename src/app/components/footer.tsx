@@ -27,7 +27,7 @@ function InstagramIcon() {
 const links = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Residents', href: '/residents' },
+  // { label: 'Residents', href: '/residents' }, // temporarily hidden
   { label: 'Supporters', href: '/sponsorship' },
   { label: 'Press', href: '/press' },
   { label: 'Events', href: 'https://luma.com/calendar/cal-DFxxla4CNZhO96B', external: true },
