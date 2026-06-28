@@ -233,7 +233,7 @@ export default function Apply() {
 
       <main className="container mx-auto px-4 py-12">
         <div className="flex flex-col items-center justify-center text-center pt-8 animate-fade-in mb-12">
-          <h1 className="text-6xl font-light tracking-normal mb-6 max-w-4xl leading-[1.1]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-normal mb-6 max-w-4xl leading-[1.1]">
             <span className="text-main font-playfair">Application Form</span>
           </h1>
           <div className="text-main-muted text-lg max-w-3xl mb-8 leading-relaxed space-y-4">

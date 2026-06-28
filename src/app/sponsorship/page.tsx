@@ -76,7 +76,7 @@ export default function Sponsorship() {
       <main className="container mx-auto px-4 pb-24">
         {/* Header */}
         <div className="text-center pt-16">
-          <h1 className="animate-fade-in text-[64px] font-light tracking-[-0.02em] text-[#191A1B] mb-3">
+          <h1 className="animate-fade-in text-5xl md:text-[64px] font-light tracking-[-0.02em] text-[#191A1B] mb-3">
             <span className="font-playfair">Support Us</span>
           </h1>
           <p className="animate-fade-in text-[#494949] text-lg max-w-xl mx-auto mb-24 leading-relaxed delay-100">
@@ -119,7 +119,7 @@ export default function Sponsorship() {
             <h2 className="text-2xl text-[#191A1B] font-medium font-playfair mb-12 text-center">
               Sponsorship Benefits
             </h2>
-            <div className="grid grid-cols-2 gap-x-16 gap-y-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-12">
               {[
                 {
                   title: "Network Access",

@@ -46,18 +46,18 @@ export default function Home() {
         {/* Hero Section */}
         <div className="flex flex-col items-center justify-center text-center pt-15 animate-fade-in">
           {/* Logo */}
-          <div className="mb-[-2rem]">
-            <img src="/foundher-logo.png" alt="FoundHer House" className="h-48" />
+          <div className="mb-[-1rem] sm:mb-[-2rem]">
+            <img src="/foundher-logo.png" alt="FoundHer House" className="h-32 sm:h-40 md:h-48" />
           </div>
-  
+
          {/* Hero Text - Tighter spacing */}
          <div className="mb-10">
-          <h1 className="text-7xl font-light tracking-[-0.03em]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-light tracking-[-0.03em]">
             <div className="text-[#191A1B] font-playfair leading-[1.3]">Where ambitious women</div>
-            <div className="text-[#191A1B] font-playfair -mt-5 leading-[1.3]">
+            <div className="text-[#191A1B] font-playfair -mt-2 sm:-mt-4 md:-mt-5 leading-[1.3]">
               build <span className="text-[#AE3B46] font-playfair italic">extraordinary</span>
             </div>
-            <div className="text-[#191A1B] font-playfair -mt-5 leading-[1.3]">ventures</div>
+            <div className="text-[#191A1B] font-playfair -mt-2 sm:-mt-4 md:-mt-5 leading-[1.3]">ventures</div>
           </h1>
         </div>
 

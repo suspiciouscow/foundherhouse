@@ -17,7 +17,7 @@ export default function About() {
       <main className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center text-center pt-16 animate-fade-in">
           {/* Header Section */}
-          <h1 className="text-[64px] font-light tracking-[-0.02em] text-[#191A1B] mb-3">
+          <h1 className="text-5xl md:text-[64px] font-light tracking-[-0.02em] text-[#191A1B] mb-3">
             <span className="font-playfair">About</span>
           </h1>
           <p className="text-[#494949] text-lg max-w-xl mx-auto mb-20 leading-relaxed">
