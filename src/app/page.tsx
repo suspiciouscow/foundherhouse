@@ -28,7 +28,7 @@ export default function Home() {
     },
     {
       question: "Do I need to have an established startup?",
-      answer: "Not at all! However we do prefer you to have startup experience. What matters to us the most is your drive to create and innovate."
+      answer: "Yes, we do require members to have an established startup. That said, we care less about stage and more about your drive to create and innovate."
     },
     {
       question: "What community and networking opportunities are available?",
