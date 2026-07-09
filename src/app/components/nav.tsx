@@ -48,6 +48,15 @@ export default function Nav() {
           </Link>
 
           <a
+            href="http://foundhersummit.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            FoundHer Summit
+          </a>
+
+          <a
             href="https://luma.com/calendar/cal-DFxxla4CNZhO96B"
             target="_blank"
             rel="noopener noreferrer"
@@ -101,6 +110,16 @@ export default function Nav() {
           >
             Supporters
           </Link>
+
+          <a
+            href="http://foundhersummit.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={close}
+            className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors py-3 px-2 rounded"
+          >
+            FoundHer Summit
+          </a>
 
           <a
             href="https://luma.com/calendar/cal-DFxxla4CNZhO96B"
